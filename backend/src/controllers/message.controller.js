@@ -22,7 +22,8 @@ class MessageController {
       const text = req.body.text;
       const fileUrls = await FileService.uploadFilesAndGiveUrls(
         req,
-        `messages/${myUserId.toString()}`
+        `messages/${myUserId.toString()}`,
+        false
       );
 
       // check if the text or images exist, if not, return an error
@@ -111,15 +112,26 @@ class MessageController {
       }
 
       // delete messages where the sender id is the current user id and the receiver id is the user to chat user id and the message id is in the messageIds array
-      const deletedMessages = await Message.deleteMany({
+
+      const foundMessages = await Message.find({
         senderId: myUserId,
         receiverId: userToChatUserId,
         _id: { $in: messageIds },
       });
 
+      const deletedResponse = await Message.deleteMany({
+        senderId: myUserId,
+        receiverId: userToChatUserId,
+        _id: { $in: messageIds },
+      });
+
+      if (deletedResponse.deletedCount === 0) {
+        return ErrorHandler.handle404("Messages not found", res);
+      }
+
       // delete the images of the deleted messages from the cloud storage
       let imagesToDelete = [];
-      for (const message of deletedMessages) {
+      for (const message of foundMessages) {
         if (message.images && message.images.length > 0) {
           imagesToDelete = imagesToDelete.concat(message.images);
         }
@@ -130,7 +142,6 @@ class MessageController {
       return SuccessHandler.handle200(
         "Messages deleted successfully",
         {
-          deletedMessages: deletedMessages,
           deletedImages: deletedImages,
         },
         res

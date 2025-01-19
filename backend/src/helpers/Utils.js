@@ -37,6 +37,7 @@ const normalizeEmail = (email) => {
   if (domainPart === "gmail.com" || domainPart === "googlemail.com") {
     localPart = localPart.split("+")[0]; // Remove everything after '+'
     localPart = localPart.replace(/\./g, ""); // Remove dots
+    localPart = localPart.toLowerCase(); // Lowercase
     domainPart = "gmail.com"; // Standardize domain
   }
 

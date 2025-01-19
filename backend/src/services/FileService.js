@@ -4,14 +4,29 @@ const { getUniqueId } = require("../helpers/Utils");
 
 class FilesUploadService {
   //! This function will be used to upload files to cloudinary and return the urls
-  async uploadFilesAndGiveUrls(req, folder) {
+  async uploadFilesAndGiveUrls(req, folder, throwErr = true) {
     try {
+      // check if files were uploaded, if throwErr is true, throw an error if no files were uploaded else return an empty array
       if (!req.file && (!req.files || req.files.length === 0)) {
-        throw new BadRequestError("No files uploaded");
+        if (throwErr) {
+          throw new BadRequestError("No files uploaded");
+        } else {
+          return [];
+        }
       }
 
       // If `req.file` exists, it's a single file upload
       const files = req.file ? [req.file] : req.files;
+
+      // If `req.file` exists, it's a single file upload, if `req.files` exists, it's a multiple file upload
+      // if files were uploaded, if throwErr is true, throw an error if no files were uploaded else return an empty array
+      if (files.length === 0) {
+        if (throwErr) {
+          throw new BadRequestError("No files uploaded");
+        } else {
+          return [];
+        }
+      }
 
       // write cloudinary upload and retuen urls here
       const uploadPromises = files.map((file) =>

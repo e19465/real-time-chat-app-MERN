@@ -1,6 +1,6 @@
 const sendEmail = require("../services/EmailService");
 const User = require("../models/User");
-const { generateOtp } = require("./Utils");
+const { generateOtp, normalizeEmail } = require("./Utils");
 const { otpSendEmailTypes } = require("../constants/common");
 const { NotFoundError, BadRequestError } = require("../helpers/CustomErrors");
 
@@ -8,6 +8,7 @@ class EmailOtpHandler {
   //! Method for sending email verification OTP
   async sendOtp(email, type) {
     try {
+      email = normalizeEmail(email); // Normalize email address
       const user = await User.findOne({ email });
       if (!user) {
         throw new NotFoundError(`User with email ${email} not found`);
@@ -39,6 +40,7 @@ class EmailOtpHandler {
   //! Method for verifying OTP
   async verifyOtp(email, otp, type) {
     try {
+      email = normalizeEmail(email); // Normalize email address
       const user = await User.findOne({ email });
       if (!user) {
         throw new NotFoundError(`User with email ${email} not found`);

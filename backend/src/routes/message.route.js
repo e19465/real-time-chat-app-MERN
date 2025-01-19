@@ -29,6 +29,7 @@ messageRouter.delete(
  * Complete endpoint examples
  * 1. get messages - GET - http://localhost:5000/api/message/:userToChatUserId
  * 2. create message - POST - http://localhost:5000/api/message/:userToChatUserId
+ * 3. delete messages - DELETE - http://localhost:5000/api/message/:userToChatUserId
  */
 
 module.exports = messageRouter;
