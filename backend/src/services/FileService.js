@@ -36,6 +36,29 @@ class FilesUploadService {
       throw err;
     }
   }
+
+  //! This function will be used to delete files from cloudinary
+  async deleteFilesByUrls(urls) {
+    try {
+      if (!urls || urls.length === 0) {
+        return { message: "No files to delete" };
+      }
+
+      // write cloudinary delete here
+      const deletePromises = urls.map((url) =>
+        cloudinary.uploader.destroy(url, function (error, result) {
+          if (error) {
+            throw error;
+          }
+          return result;
+        })
+      );
+      const results = await Promise.all(deletePromises);
+      return results;
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 module.exports = new FilesUploadService();
