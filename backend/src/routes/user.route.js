@@ -5,7 +5,7 @@ const multerMiddleware = require("../middleware/multerMiddleware");
 
 // get user profile (Authorized user)
 userRouter.get(
-  "/profile",
+  "/profile/:userId",
   JwtMiddleware.verifyAccessToken,
   UserController.getProfile
 );

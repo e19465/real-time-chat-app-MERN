@@ -8,7 +8,7 @@ class UserController {
   async getProfile(req, res) {
     try {
       // obtain the current user id from the request and check if user exists else return an error
-      const userId = req.user.userId;
+      const userId = req.params.userId;
       const user = await User.findById(userId);
       if (!user) {
         return ErrorHandler.handle404("User not found", res);
