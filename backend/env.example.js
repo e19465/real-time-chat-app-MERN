@@ -6,3 +6,7 @@ const REFRESH_TOKEN_SECRET = ""; // secret for refresh token
 const SD_CHAT_SUPPORT_EMAIL = ""; // email for support
 const APP_EMAIL = ""; // email for sending emails to users
 const APP_EMAIL_PASSWORD = ""; // password for the email
+const NODE_ENV = "development"; // if in production, set to "production"
+const CLOUDINARY_CLOUD_NAME = ""; // cloudinary cloud name
+const CLOUDINARY_API_KEY = ""; // cloudinary api key
+const CLOUDINARY_API_SECRET = ""; // cloudinary api secret

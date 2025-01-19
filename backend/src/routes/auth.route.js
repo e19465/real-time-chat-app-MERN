@@ -1,5 +1,6 @@
 const authRouter = require("express").Router();
 const AuthController = require("../controllers/auth.controller");
+const JwtMiddleware = require("../middleware/jwtMiddleware");
 
 // register endpoint
 authRouter.post("/register", AuthController.register);
@@ -8,7 +9,11 @@ authRouter.post("/register", AuthController.register);
 authRouter.post("/login", AuthController.login);
 
 // logout endpoint
-authRouter.post("/logout", AuthController.logout);
+authRouter.post(
+  "/logout",
+  JwtMiddleware.verifyAccessToken,
+  AuthController.logout
+);
 
 // send email verification OTP email endpoint
 authRouter.post("/send-email-otp", AuthController.sendEmailVerificationEmail);
@@ -26,7 +31,11 @@ authRouter.post(
 authRouter.post("/reset-password", AuthController.resetPassword);
 
 // refresh tokens endpoint
-authRouter.post("/refresh-tokens", AuthController.refreshTokens);
+authRouter.post(
+  "/refresh-tokens",
+  JwtMiddleware.verifyRefreshToken,
+  AuthController.refreshTokens
+);
 
 /**
  * Complete end points for the auth route

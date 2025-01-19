@@ -45,15 +45,22 @@ class AuthController {
       const accessToken = JwtHandler.getAccessToken(user._id, user.email);
       const refreshToken = JwtHandler.getRefreshToken(user._id);
 
+      res.cookie("refresh", refreshToken, {
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        httpOnly: true, // prevent XSS attacks
+        sameSite: "strict", // prevent CSRF attacks
+        secure: process.env.NODE_ENV === "production", // only send cookie over https in production
+      });
+
+      res.cookie("access", accessToken, {
+        maxAge: 5 * 60 * 1000, // 5 minutes
+        httpOnly: true, // prevent XSS attacks
+        sameSite: "strict", // prevent CSRF attacks
+        secure: process.env.NODE_ENV === "production", // only send cookie over https in production
+      });
+
       // send success response with tokens
-      return SuccessHandler.handle200(
-        "Login successful",
-        {
-          accessToken,
-          refreshToken,
-        },
-        res
-      );
+      return SuccessHandler.handle200("Login successful", null, res);
     } catch (err) {
       return ErrorHandler.handle500AndCustomError(err, res);
     }
@@ -378,12 +385,23 @@ class AuthController {
       );
       const refreshToken = JwtHandler.getRefreshToken(userFromDb._id);
 
+      res.cookie("refresh", refreshToken, {
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        httpOnly: true, // prevent XSS attacks
+        sameSite: "strict", // prevent CSRF attacks
+        secure: process.env.NODE_ENV === "production", // only send cookie over https in production
+      });
+
+      res.cookie("access", accessToken, {
+        maxAge: 5 * 60 * 1000, // 5 minutes
+        httpOnly: true, // prevent XSS attacks
+        sameSite: "strict", // prevent CSRF attacks
+        secure: process.env.NODE_ENV === "production", // only send cookie over https in production
+      });
+
       return SuccessHandler.handle200(
         "Tokens refreshed successfully",
-        {
-          accessToken,
-          refreshToken,
-        },
+        null,
         res
       );
     } catch (err) {
@@ -394,6 +412,9 @@ class AuthController {
   //! Method for user logout
   async logout(req, res) {
     try {
+      res.clearCookie("refresh", "", { maxAge: 0 });
+      res.clearCookie("access", "", { maxAge: 0 });
+      return SuccessHandler.handle200("Logout successful", null, res);
     } catch (err) {
       return ErrorHandler.handle500AndCustomError(err, res);
     }

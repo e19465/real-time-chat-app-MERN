@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const corsOptions = require("./config/corsOptions");
 const connectToDatabaseAndStartServer = require("./db");
+const cookieParser = require("cookie-parser");
 
 // configurations
 const app = express();
@@ -13,6 +14,9 @@ dotenv.config();
 //! middlewares
 // CORS middleware
 app.use(cors(corsOptions));
+
+// middleware for parsing cookies
+app.use(cookieParser());
 
 // Parse URL-encoded bodies (HTML form data)
 app.use(bodyParser.urlencoded({ extended: true }));

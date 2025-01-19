@@ -6,7 +6,7 @@ class JwtHandler {
   getAccessToken(userId, email) {
     const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
     const timestamp = Math.floor(Date.now() / 1000);
-    const expirationTime = timestamp + 60 * 5; // expires in 5 minutes
+    const expirationTime = timestamp + 60 * 60 * 24 * 7; // expires in week
     const payload = {
       userId: userId,
       email: email,

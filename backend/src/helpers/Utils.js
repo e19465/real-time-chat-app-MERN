@@ -1,4 +1,5 @@
 const otpGenerator = require("otp-generator");
+const { v4: uuidv4 } = require("uuid");
 
 const generateOtp = (num) => {
   return otpGenerator.generate(num, {
@@ -42,4 +43,13 @@ const normalizeEmail = (email) => {
   return `${localPart}@${domainPart}`;
 };
 
-module.exports = { generateOtp, passwordStrengthChecker, normalizeEmail };
+const getUniqueId = () => {
+  return uuidv4();
+};
+
+module.exports = {
+  generateOtp,
+  passwordStrengthChecker,
+  normalizeEmail,
+  getUniqueId,
+};
