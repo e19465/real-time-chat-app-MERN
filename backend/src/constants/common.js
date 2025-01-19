@@ -7,4 +7,9 @@ const mongoDbErrorCodes = {
   duplicateKey: 11000,
 };
 
-module.exports = { otpSendEmailTypes, mongoDbErrorCodes };
+const ModalNames = {
+  User: "User",
+  Message: "Message",
+};
+
+module.exports = { otpSendEmailTypes, mongoDbErrorCodes, ModalNames };

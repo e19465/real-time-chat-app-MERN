@@ -1,21 +1,22 @@
 const mongoose = require("mongoose");
+const { ModalNames } = require("../constants/common");
 
 const messageSchema = new mongoose.Schema({
   senderId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: ModalNames.User,
     required: true,
   },
   receiverId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: ModalNames.User,
     required: true,
   },
   text: {
     type: String,
-    required: true,
   },
   image: {
     type: String,
-    default: "",
   },
 });
 
