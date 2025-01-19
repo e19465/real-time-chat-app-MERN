@@ -3,6 +3,13 @@ const userRouter = require("express").Router();
 const JwtMiddleware = require("../middleware/jwtMiddleware");
 const multerMiddleware = require("../middleware/multerMiddleware");
 
+// get user profile (Authorized user)
+userRouter.get(
+  "/profile",
+  JwtMiddleware.verifyAccessToken,
+  UserController.getProfile
+);
+
 // update profile picture (Authorized user)
 userRouter.put(
   "/update-dp",
@@ -20,8 +27,9 @@ userRouter.put(
 
 /**
  * Complete endpoint examples
- * 1. update dp - PUT - http://localhost:5000/api/user/update-dp
- * 2. update info - PUT - http://localhost:5000/api/user/update-info
+ * 1. get profile - GET - http://localhost:5000/api/user/profile
+ * 2. update dp - PUT - http://localhost:5000/api/user/update-dp
+ * 3. update info - PUT - http://localhost:5000/api/user/update-info
  */
 
 module.exports = userRouter;
