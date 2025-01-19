@@ -41,6 +41,8 @@ class MessageController {
       // save the message to the database
       const savedMessage = await newMessage.save();
 
+      //TODO: real time functionality with socket.io
+
       // return a success response with the saved message
       return SuccessHandler.handle201(
         "Message created successfully",
