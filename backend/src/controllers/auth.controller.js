@@ -62,6 +62,7 @@ class AuthController {
       // send success response with tokens
       return SuccessHandler.handle200("Login successful", null, res);
     } catch (err) {
+      console.log("Error logging in", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
@@ -121,6 +122,7 @@ class AuthController {
         res
       );
     } catch (err) {
+      console.log("Error registering user", err);
       if (err.code === mongoDbErrorCodes.duplicateKey) {
         return ErrorHandler.handle400("Email already exists", res);
       }
@@ -169,6 +171,7 @@ class AuthController {
         res
       );
     } catch (err) {
+      console.log("Error sending email verification email", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
@@ -202,6 +205,7 @@ class AuthController {
         res
       );
     } catch (err) {
+      console.log("Error verifying email", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
@@ -242,6 +246,7 @@ class AuthController {
         res
       );
     } catch (err) {
+      console.log("Error sending password reset email", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
@@ -291,6 +296,7 @@ class AuthController {
       await user.save();
       return SuccessHandler.handle200("Password reset successfully", null, res);
     } catch (err) {
+      console.log("Error resetting password", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
@@ -358,6 +364,7 @@ class AuthController {
         res
       );
     } catch (err) {
+      console.log("Error changing password", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
@@ -405,6 +412,7 @@ class AuthController {
         res
       );
     } catch (err) {
+      console.log("Error refreshing tokens", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
@@ -416,6 +424,7 @@ class AuthController {
       res.clearCookie("access", "", { maxAge: 0 });
       return SuccessHandler.handle200("Logout successful", null, res);
     } catch (err) {
+      console.log("Error logging out", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }

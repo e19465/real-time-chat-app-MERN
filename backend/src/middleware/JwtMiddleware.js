@@ -2,6 +2,12 @@ const JwtHandler = require("../helpers/JwtHandler");
 const ErrorHandler = require("../helpers/ErrorHandler");
 
 class JwtMiddleware {
+  constructor() {
+    this.verifyAccessToken = this.verifyAccessToken.bind(this);
+    this.verifyTokenAndAccountId = this.verifyTokenAndAccountId.bind(this);
+    this.verifyRefreshToken = this.verifyRefreshToken.bind(this);
+  }
+
   //! Middleware to verify the access token
   verifyAccessToken(req, res, next) {
     const cookies = req.cookies;
@@ -27,8 +33,8 @@ class JwtMiddleware {
   //! Middleware to verify the access token and account id
   verifyTokenAndAccountId(req, res, next) {
     this.verifyAccessToken(req, res, () => {
-      if (req.params.account) {
-        if (req.user.userId === req.params.account) {
+      if (req.params.userId) {
+        if (req.user.userId === req.params.userId) {
           next();
         } else {
           return ErrorHandler.handle403("Forbidden", res);

@@ -19,6 +19,7 @@ class UserController {
         res
       );
     } catch (err) {
+      console.log("Error fetching user profile", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
@@ -27,16 +28,17 @@ class UserController {
   async getUsers(req, res) {
     try {
       const userId = req.user.userId;
-      const users = await User.find();
-      const filteredUsers = users.filter(
-        (user) => user._id.toString() !== userId
-      );
-      return SuccessHandler.handle200(
-        "Users fetched successfully",
-        filteredUsers,
-        res
-      );
+      const users = await User.find({
+        _id: { $ne: userId },
+      }).select({
+        _id: 1,
+        fullName: 1,
+        email: 1,
+        profilePic: 1,
+      });
+      return SuccessHandler.handle200("Users fetched successfully", users, res);
     } catch (err) {
+      console.log("Error fetching users", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
@@ -56,6 +58,7 @@ class UserController {
       await user.save();
       return SuccessHandler.handle200("Profile picture updated", null, res);
     } catch (err) {
+      console.log("Error updating profile picture", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
@@ -71,6 +74,7 @@ class UserController {
       );
       return SuccessHandler.handle200("Profile info updated", savedUser, res);
     } catch (err) {
+      console.log("Error updating profile info", err);
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
