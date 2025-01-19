@@ -27,5 +27,5 @@ app.use(express.json());
 // Serve static files from the "static" directory
 app.use(express.static(path.join(__dirname, "..", "static")));
 
-//! Connect to the database initially
+//! Connect to the database initially, Then start the server
 connectToDatabaseAndStartServer(app);
