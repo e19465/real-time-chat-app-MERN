@@ -23,6 +23,24 @@ class UserController {
     }
   }
 
+  //! get users (Authorized user)
+  async getUsers(req, res) {
+    try {
+      const userId = req.user.userId;
+      const users = await User.find();
+      const filteredUsers = users.filter(
+        (user) => user._id.toString() !== userId
+      );
+      return SuccessHandler.handle200(
+        "Users fetched successfully",
+        filteredUsers,
+        res
+      );
+    } catch (err) {
+      return ErrorHandler.handle500AndCustomError(err, res);
+    }
+  }
+
   //! update profile picture (Authorized user)
   async updateProfilePicture(req, res) {
     try {

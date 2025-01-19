@@ -10,6 +10,13 @@ userRouter.get(
   UserController.getProfile
 );
 
+// get users (Authorized user)
+userRouter.get(
+  "/users",
+  JwtMiddleware.verifyAccessToken,
+  UserController.getUsers
+);
+
 // update profile picture (Authorized user)
 userRouter.put(
   "/update-dp",
@@ -30,6 +37,7 @@ userRouter.put(
  * 1. get profile - GET - http://localhost:5000/api/user/profile
  * 2. update dp - PUT - http://localhost:5000/api/user/update-dp
  * 3. update info - PUT - http://localhost:5000/api/user/update-info
+ * 4. get users - GET - http://localhost:5000/api/user/users
  */
 
 module.exports = userRouter;

@@ -16,6 +16,7 @@ function serverRoutes(app) {
   //! other routes
   app.use("/api/auth", routes.authRoutes);
   app.use("/api/user", routes.userRoutes);
+  app.use("/api/message", routes.messageRoutes);
 
   //! file size too large error handling
   app.use((err, req, res, next) => {
