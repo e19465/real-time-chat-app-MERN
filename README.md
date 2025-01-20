@@ -29,7 +29,7 @@ A real-time chat application built using the MERN stack. This app allows users t
   - Tailwind CSS (for custom styling)
   - DaisyUI (for pre-built UI components)
   - Axios (for API requests)
-  - Axios Interceptors (for handling authentication headers)
+  - Axios Interceptors (for automating token refresh process)
 
 - **Backend**:
   - Node.js
