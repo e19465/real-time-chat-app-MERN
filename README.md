@@ -1,6 +1,6 @@
 # Real-Time Chat Application (MERN)
 
-![Chat App Logo](public/chat_people.png)
+![Chat App Logo](frontend/public/chat_people.png)
 
 A real-time chat application built using the MERN stack. This app allows users to sign up, log in, and chat with others in real-time. It supports features such as email verification, JWT authentication, and secure backend communication. The frontend is built using React and Vite with a stylish UI using Tailwind CSS and DaisyUI.
 
