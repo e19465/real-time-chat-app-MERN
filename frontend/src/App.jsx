@@ -1,14 +1,25 @@
 import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
 import {
+  authPageUrls,
+  commonPageUrls,
+  userPageUrls,
+} from "./constants/pageUrls";
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import {
+  // Common Pages
   HomePage,
   NotFoundPage,
+
+  // Auth Pages
   SignInPage,
   SignUpPage,
   SendEmailVerificationPage,
   VerifyEmailPage,
   SendPasswordResetEmailPage,
   ResetPasswordPage,
+
+  // User Account Related Pages
   UserProfilePage,
   UserSettingsPage,
 } from "./pages";
@@ -19,27 +30,55 @@ const App = () => {
       <ToastContainer theme="light" />
 
       <Routes>
-        <Route path="/" element={<HomePage />} exact />
-
-        {/* Auth Pages */}
-        <Route path="/auth/sign-in" element={<SignInPage />} />
-        <Route path="/auth/sign-up" element={<SignUpPage />} />
+        {/******************************* - Common Pages - ******************************************/}
         <Route
-          path="/auth/send-email-verification"
+          path={commonPageUrls.home}
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+          exact
+        />
+
+        {/********************************* - Auth Pages - ******************************************/}
+
+        <Route path={authPageUrls.signIn} element={<SignInPage />} />
+        <Route path={authPageUrls.signUp} element={<SignUpPage />} />
+        <Route
+          path={authPageUrls.sendEmailVerification}
           element={<SendEmailVerificationPage />}
         />
-        <Route path="/auth/verify-email" element={<VerifyEmailPage />} />
+        <Route path={authPageUrls.verifyEmail} element={<VerifyEmailPage />} />
         <Route
-          path="/auth/send-password-reset-email"
+          path={authPageUrls.sendPasswordResetEmail}
           element={<SendPasswordResetEmailPage />}
         />
-        <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
-        {/* End - Auth Pages */}
+        <Route
+          path={authPageUrls.resetPassword}
+          element={<ResetPasswordPage />}
+        />
 
-        {/* User Account Related Pages */}
-        <Route path="/profile/settings" element={<UserSettingsPage />} />
-        <Route path="/profile/:userId" element={<UserProfilePage />} />
-        {/* End - User Account Related Pages */}
+        {/************************ - User Account Related Pages - **********************************/}
+
+        <Route
+          path={userPageUrls.settings}
+          element={
+            <ProtectedRoute>
+              <UserSettingsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={userPageUrls.userProfile}
+          element={
+            <ProtectedRoute>
+              <UserProfilePage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/******************************************************************************/}
 
         {/* Not found page */}
         <Route path="/*" element={<NotFoundPage />} />

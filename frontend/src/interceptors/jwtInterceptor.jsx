@@ -1,4 +1,5 @@
 import axios from "axios";
+import { authPageUrls } from "../constants/pageUrls";
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const axiosInstance = axios.create({
@@ -39,7 +40,7 @@ axiosInstance.interceptors.response.use(
       } catch (refreshError) {
         // Handle refresh errors by redirecting to the login page.
         console.log("Token refresh failed:", refreshError);
-        // window.location.href = "/auth/sign-in";
+        window.location.href = authPageUrls.signIn;
         return Promise.reject(refreshError);
       }
     }
