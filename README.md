@@ -1,4 +1,4 @@
-# Real-Time Chat Application (MERN)
+# Real-Time Chat Application (MERN | Socket.io)
 
 ![Chat App Logo](frontend/public/chat_people.png)
 
