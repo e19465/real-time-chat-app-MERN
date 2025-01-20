@@ -15,8 +15,8 @@ A real-time chat application built using the MERN stack. This app allows users t
 - **Modern Frontend**: Developed using React and Vite for fast and efficient frontend performance.
 - **Backend Services**: RESTful API connection between the frontend and backend using Axios interceptors.
 - **Best Practices**: The app follows best practices in both frontend and backend development for maintainability and scalability.
-- **Cookie-Based Authentication**:
-  The application uses **cookie-based authentication** to securely store JWT tokens in **HttpOnly cookies**. This enhances security by ensuring the token cannot be accessed via JavaScript, reducing the risk of cross-site scripting (XSS) attacks. With this approach, the token is sent automatically with each request, making it seamless for users to stay logged in while protecting sensitive information.
+- **Cookie-Based Authentication**:  
+  The application uses **cookie-based authentication** to securely store JWT tokens in **HttpOnly cookies**, preventing access via JavaScript and reducing the risk of **Cross-Site Scripting (XSS)** and **Cross-Site Request Forgery (CSRF)** attacks. This ensures seamless login while protecting sensitive information.
 
 ---
 
