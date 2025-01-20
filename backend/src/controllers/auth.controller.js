@@ -71,10 +71,18 @@ class AuthController {
   async register(req, res) {
     try {
       // get email, full name and password from request body and check if they are present, if not return 400
-      const { email, fullName, password } = req.body;
-      if (!email || !password || !fullName) {
+      const { email, fullName, password, confirmPassword } = req.body;
+      if (!email || !password || !fullName || !confirmPassword) {
         return ErrorHandler.handle400(
-          "Email, Full Name and password are required",
+          "Email, Full Name, password and confirm password are required",
+          res
+        );
+      }
+
+      // check if password and confirm password match, if not return 400
+      if (password !== confirmPassword) {
+        return ErrorHandler.handle400(
+          "Password and Confirm Password do not match",
           res
         );
       }

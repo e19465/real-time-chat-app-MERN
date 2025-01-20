@@ -22,7 +22,6 @@ class JwtMiddleware {
           return ErrorHandler.handle500AndCustomError(err, res);
         }
       } else {
-        console.log("Here");
         return ErrorHandler.handle401("Unauthorized", res);
       }
     } else {
