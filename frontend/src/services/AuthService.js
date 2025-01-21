@@ -102,12 +102,12 @@ class AuthService {
   }
 
   // changePassword method
-  async changePassword(password, newPassword, confirmPassword) {
+  async changePassword(formData) {
     try {
       const response = await axiosInstance.post("/auth/change-password", {
-        password,
-        newPassword,
-        confirmNewPassword,
+        password: formData.password,
+        newPassword: formData.newPassword,
+        confirmNewPassword: formData.confirmNewPassword,
       });
       return response.data;
     } catch (err) {
