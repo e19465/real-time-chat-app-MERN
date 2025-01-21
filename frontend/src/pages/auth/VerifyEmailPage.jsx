@@ -94,7 +94,7 @@ const VerifyEmailPage = () => {
       >
         <AuthImagePattern
           title="Verify Your Email"
-          subtitle="Click the link sent to your inbox to verify your email and complete the process."
+          subtitle="Get the OTP we sent to your email and verify your email address and verify your email address to complete the registration process."
           animation={animationTypes.shake}
         />
       </div>
