@@ -16,8 +16,8 @@ const AuthUsefullLinks = ({
   const defaultVerifyEmailMessage = "";
   const defaultResetPwMessage = "";
   return (
-    <div className="w-full flex flex-col items-center justify-center gap-1">
-      <ul className="list-none">
+    <div className="w-full flex flex-col items-center justify-center">
+      <ul className="list-none w-full flex flex-col gap-1">
         {showSignUp && (
           <LinkLi
             link={authPageUrls.signUp}
