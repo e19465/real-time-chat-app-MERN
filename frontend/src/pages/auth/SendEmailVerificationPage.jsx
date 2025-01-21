@@ -29,6 +29,7 @@ const SendEmailVerificationPage = () => {
         response,
         "Email verification OTP has been successfully sent to your email"
       );
+      localStorage.setItem("email_ver_otp_send_email", email);
       navigate(authPageUrls.verifyEmail);
     } catch (err) {
       globalErrorHandler(
@@ -48,7 +49,7 @@ const SendEmailVerificationPage = () => {
           handleSubmit={handleSubmit}
           TopIcon={MessageSquare}
           topTitle="Send Email Verification"
-          topSubtitle="Verify your email address to get started"
+          topSubtitle="Send an OTP email to verify your email address"
           loading={loading}
           loadingBtnText="Sending..."
           notLoadingBtnText="Send OTP Email"
