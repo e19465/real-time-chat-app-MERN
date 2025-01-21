@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { commonPageUrls } from "../constants/pageUrls";
 
 const PostAuthRestrictRoute = ({ children }) => {
   const isAuthenticated = false;
@@ -7,7 +8,7 @@ const PostAuthRestrictRoute = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/", { replace: true });
+      navigate(commonPageUrls.home, { replace: true });
     }
   }, [isAuthenticated, navigate]);
 
