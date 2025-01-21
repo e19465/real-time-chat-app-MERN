@@ -12,7 +12,7 @@ import { Mail, MessageSquare } from "lucide-react";
 import InputContainer from "../../components/auth/InputContainer";
 import UsefullLinks from "../../components/auth/UsefullLinks";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
-import { animationTypes } from "../../constants/shared";
+import { animationTypes, localStorageKeys } from "../../constants/shared";
 import AuthForm from "../../components/auth/AuthForm";
 
 const VerifyEmailPage = () => {
@@ -33,7 +33,7 @@ const VerifyEmailPage = () => {
       setLoading(true);
       const response = await AuthService.verifyEmail(email, otp);
       globalSuccessHandler(response, "Email verified successfully");
-      localStorage.removeItem("email_ver_otp_send_email");
+      localStorage.removeItem(localStorageKeys.EMAIL_VER_OTP_SEND_EMAIL);
       navigate(authPageUrls.signIn);
     } catch (err) {
       globalErrorHandler(

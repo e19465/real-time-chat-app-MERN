@@ -13,7 +13,7 @@ import UsefullLinks from "../../components/auth/UsefullLinks";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 import AuthForm from "../../components/auth/AuthForm";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
-import { animationTypes } from "../../constants/shared";
+import { animationTypes, localStorageKeys } from "../../constants/shared";
 
 const SendEmailVerificationPage = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const SendEmailVerificationPage = () => {
         response,
         "Email verification OTP has been successfully sent to your email"
       );
-      localStorage.setItem("email_ver_otp_send_email", email);
+      localStorage.setItem(localStorageKeys.EMAIL_VER_OTP_SEND_EMAIL, email);
       navigate(authPageUrls.verifyEmail);
     } catch (err) {
       globalErrorHandler(
