@@ -1,18 +1,27 @@
 import { toast } from "react-toastify";
 
-export const globalErrorHandler = (error, message, defaultMessage) => {
+export const globalErrorHandler = (
+  error,
+  message = null,
+  defaultMessage = null
+) => {
   if (error?.response?.data?.error) {
     toast.error(error.response.data.error);
-  } else {
+  } else if (defaultMessage) {
     toast.error(defaultMessage);
   }
-  console.log(`${message}: ${error}`);
+
+  if (message) {
+    console.log(`${message}: ${error}`);
+  } else {
+    console.log("Error occurred: ", error);
+  }
 };
 
-export const globalSuccessHandler = (data, defaultMessage) => {
+export const globalSuccessHandler = (data, defaultMessage = null) => {
   if (data?.message) {
     toast.success(data.message);
-  } else {
+  } else if (defaultMessage) {
     toast.success(defaultMessage);
   }
 };
