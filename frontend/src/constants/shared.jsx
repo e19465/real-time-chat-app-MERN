@@ -9,4 +9,5 @@ export const animationTypes = {
 
 export const localStorageKeys = {
   EMAIL_VER_OTP_SEND_EMAIL: "email_ver_otp_send_email",
+  PASSWORD_VER_OTP_SEND_EMAIL: "password_ver_otp_send_email",
 };
