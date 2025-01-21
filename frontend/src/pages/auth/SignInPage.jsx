@@ -122,7 +122,7 @@ const SignInPage = () => {
       >
         <AuthImagePattern
           title="Let's Get You Connected"
-          subtitle="Start exploring all the features by getting into your account."
+          subtitle="Start connecting with your loved ones by getting into your account."
           animation={animationTypes.spin}
         />
       </div>
