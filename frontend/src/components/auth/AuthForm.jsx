@@ -15,7 +15,7 @@ const AuthForm = ({
       onSubmit={handleSubmit}
       className="w-full h-auto flex flex-col items-center justify-center"
     >
-      <TopIcon size={64} className="size-8 text-primary mb-1" />
+      <TopIcon className="size-8 text-primary mb-1" />
       <h1 className="text-xl font-semibold text-center">{topTitle}</h1>
       <p className="text-primary">{topSubtitle}</p>
 
