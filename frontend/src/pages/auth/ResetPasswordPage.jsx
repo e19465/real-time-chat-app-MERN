@@ -159,7 +159,7 @@ const ResetPasswordPage = () => {
         <AuthImagePattern
           title="Reset Your Password"
           subtitle="Enter a new password to secure your account. Your new password will help you get back to your account."
-          animation={animationTypes.bounce}
+          animation={animationTypes.ping}
         />
       </div>
     </AuthLayout>

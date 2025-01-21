@@ -71,7 +71,11 @@ const SendPasswordResetEmailPage = () => {
           </InputContainer>
         </AuthForm>
         <div className="w-full h-auto mt-2">
-          <UsefullLinks showSignIn={true} showSignUp={true} />
+          <UsefullLinks
+            showSignIn={true}
+            showSignUp={true}
+            showResetPassword={true}
+          />
         </div>
       </LeftRegionContainer>
 
