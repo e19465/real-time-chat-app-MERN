@@ -12,8 +12,8 @@ import { animationTypes, localStorageKeys } from "../../constants/shared";
 import { authPageUrls } from "../../constants/pageUrls";
 import { Mail, MessageSquare } from "lucide-react";
 import InputContainer from "../../components/auth/InputContainer";
-import UsefullLinks from "../../components/auth/UsefullLinks";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
+import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
 
 const SendPasswordResetEmailPage = () => {
   //! Hooks
@@ -71,10 +71,16 @@ const SendPasswordResetEmailPage = () => {
           </InputContainer>
         </AuthForm>
         <div className="w-full h-auto mt-2">
-          <UsefullLinks
-            showSignIn={true}
-            showSignUp={true}
-            showResetPassword={true}
+          <AuthUsefullLinks
+            showSignIn={{
+              message: "Already have an account?",
+            }}
+            showSignUp={{
+              message: "Don't have an account?",
+            }}
+            showResetPassword={{
+              message: "Already have password reset OTP?",
+            }}
           />
         </div>
       </LeftRegionContainer>

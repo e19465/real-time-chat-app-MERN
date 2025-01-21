@@ -9,11 +9,11 @@ import { authPageUrls } from "../../constants/pageUrls";
 import { useNavigate } from "react-router-dom";
 import InputContainer from "../../components/auth/InputContainer";
 import { Mail, MessageSquare } from "lucide-react";
-import UsefullLinks from "../../components/auth/UsefullLinks";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 import AuthForm from "../../components/auth/AuthForm";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
 import { animationTypes, localStorageKeys } from "../../constants/shared";
+import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
 
 const SendEmailVerificationPage = () => {
   const navigate = useNavigate();
@@ -68,10 +68,16 @@ const SendEmailVerificationPage = () => {
           </InputContainer>
         </AuthForm>
         <div className="w-full h-auto mt-2">
-          <UsefullLinks
-            showSignIn={true}
-            showSignUp={true}
-            showVerifyEmail={true}
+          <AuthUsefullLinks
+            showSignUp={{
+              message: "Don't have an account?",
+            }}
+            showSignIn={{
+              message: "Already have an account?",
+            }}
+            showVerifyEmail={{
+              message: "Already have an email verify OTP?",
+            }}
           />
         </div>
       </LeftRegionContainer>

@@ -10,10 +10,10 @@ import { useNavigate } from "react-router-dom";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 import { Mail, MessageSquare } from "lucide-react";
 import InputContainer from "../../components/auth/InputContainer";
-import UsefullLinks from "../../components/auth/UsefullLinks";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
 import { animationTypes, localStorageKeys } from "../../constants/shared";
 import AuthForm from "../../components/auth/AuthForm";
+import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
 
 const VerifyEmailPage = () => {
   //! Hooks
@@ -52,7 +52,7 @@ const VerifyEmailPage = () => {
         <AuthForm
           handleSubmit={handleSubmit}
           TopIcon={MessageSquare}
-          topTitle="Varify Email"
+          topTitle="Verify Email"
           topSubtitle="Verify your email address to get started"
           loading={loading}
           loadingBtnText="Verifying..."
@@ -84,7 +84,14 @@ const VerifyEmailPage = () => {
           </InputContainer>
         </AuthForm>
         <div className="w-full h-auto mt-2">
-          <UsefullLinks showSignIn={true} showSendEmailVerification={true} />
+          <AuthUsefullLinks
+            showSignIn={{
+              message: "Email already verified?",
+            }}
+            showSendEmailVerification={{
+              message: "Didn't receive verification email?",
+            }}
+          />
         </div>
       </LeftRegionContainer>
 

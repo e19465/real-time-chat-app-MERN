@@ -12,8 +12,8 @@ import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 import AuthForm from "../../components/auth/AuthForm";
 import { Eye, EyeOff, Lock, Mail, MessageSquare } from "lucide-react";
 import InputContainer from "../../components/auth/InputContainer";
-import UsefullLinks from "../../components/auth/UsefullLinks";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
+import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
 
 const ResetPasswordPage = () => {
   //! Hooks
@@ -148,7 +148,14 @@ const ResetPasswordPage = () => {
           </InputContainer>
         </AuthForm>
         <div className="w-full h-auto mt-2">
-          <UsefullLinks showSignIn={true} showSendPasswordResetEmail={true} />
+          <AuthUsefullLinks
+            showSignIn={{
+              message: "Remember your current password?",
+            }}
+            showSendPasswordResetEmail={{
+              message: "Didn't received password reset OTP?",
+            }}
+          />
         </div>
       </LeftRegionContainer>
 

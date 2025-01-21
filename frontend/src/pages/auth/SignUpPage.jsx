@@ -18,10 +18,10 @@ import {
 import { authPageUrls } from "../../constants/pageUrls";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
 import { animationTypes } from "../../constants/shared";
-import UsefullLinks from "../../components/auth/UsefullLinks";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthForm from "../../components/auth/AuthForm";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
+import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
 
 const SignUpPage = () => {
   //! Hooks
@@ -154,7 +154,11 @@ const SignUpPage = () => {
           </InputContainer>
         </AuthForm>
         <div className="w-full h-auto mt-2">
-          <UsefullLinks showSignIn={true} />
+          <AuthUsefullLinks
+            showSignIn={{
+              message: "Already have an account?",
+            }}
+          />
         </div>
       </LeftRegionContainer>
 

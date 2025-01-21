@@ -12,7 +12,7 @@ import { animationTypes } from "../../constants/shared";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthForm from "../../components/auth/AuthForm";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
-import UsefullLinks from "../../components/auth/UsefullLinks";
+import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
 
 const SignInPage = () => {
   //! Hooks
@@ -99,11 +99,19 @@ const SignInPage = () => {
           </InputContainer>
         </AuthForm>
         <div className="w-full h-auto mt-2">
-          <UsefullLinks
-            showSignUp={true}
-            showResetPassword={true}
-            showVerifyEmail={true}
-            showSendEmailVerification={true}
+          <AuthUsefullLinks
+            showResetPassword={{
+              message: "Forgot password?",
+            }}
+            showVerifyEmail={{
+              message: "Didn't verify your email?",
+            }}
+            showSendEmailVerification={{
+              message: "Didn't receive verification email?",
+            }}
+            showSignUp={{
+              message: "Don't have an account?",
+            }}
           />
         </div>
       </LeftRegionContainer>
