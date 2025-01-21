@@ -94,7 +94,7 @@ const SignUpPage = () => {
           </InputContainer>
           <InputContainer label="Email" Icon={Mail}>
             <input
-              type="text"
+              type="email"
               className="grow placeholder:text-sm"
               name="email-signup"
               required
@@ -127,7 +127,6 @@ const SignUpPage = () => {
               {isPasswordVisible ? <EyeOff size={24} /> : <Eye size={24} />}
             </button>
           </InputContainer>
-
           <InputContainer label="Confirm Password" Icon={Lock}>
             <input
               type={isConfirmPasswordVisible ? "text" : "password"}

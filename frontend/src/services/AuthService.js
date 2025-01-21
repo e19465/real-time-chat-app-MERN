@@ -86,13 +86,13 @@ class AuthService {
   }
 
   // The resetPassword method
-  async resetPassword(email, otp, password, confirmPassword) {
+  async resetPassword(formData) {
     try {
       const response = await axiosInstance.post("/auth/reset-password", {
-        email,
-        otp,
-        password,
-        confirmPassword,
+        email: formData.email,
+        otp: formData.otp,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
       });
       return response.data;
     } catch (err) {

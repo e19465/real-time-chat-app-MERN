@@ -51,7 +51,7 @@ const UsefullLinks = ({
           <LinkLi
             link={authPageUrls.sendPasswordResetEmail}
             title="Didn't receive password reset email?"
-            linkText="Send password reset email"
+            linkText="Send"
           />
         )}
       </ul>
