@@ -64,7 +64,7 @@ const SignInPage = () => {
         >
           <InputContainer label="Email" Icon={Mail}>
             <input
-              type="text"
+              type="email"
               required
               className="grow placeholder:text-sm"
               name="email-signup"
