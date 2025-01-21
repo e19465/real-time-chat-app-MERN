@@ -6,49 +6,107 @@ import {
   globalErrorHandler,
   globalSuccessHandler,
 } from "../../helpers/responseHandler";
+import { Eye, EyeOff, Loader, Lock, Mail, MessageSquare } from "lucide-react";
+import AuthImagePattern from "../../components/auth/AuthImagePattern";
+import { animationTypes } from "../../constants/shared";
+import InputContainer from "../../components/auth/InputContainer";
+import AuthForm from "../../components/auth/AuthForm";
 
 const SignInPage = () => {
+  //! Hooks
   const navigate = useNavigate();
-  const [email, sentEmail] = useState("dsas@gmail.com");
-  const [password, setPassword] = useState("sas5Sa550Aas$");
 
+  //! State variables
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  //! methods for toggling password visibility
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible((prevState) => !prevState);
+  };
+
+  //! Handle form submission and sign in
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await AuthService.login(email, password);
+      setLoading(true);
+      const response = await AuthService.login(formData);
       globalSuccessHandler(response, "Login successful");
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (err) {
       globalErrorHandler(
         err,
         "Error in login",
         "Something went wrong, try again later"
       );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <AuthLayout>
-      <div className="text-white">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => sentEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Password</label>
+      <div region="left" className="w-full h-full flex flex-col">
+        <AuthForm
+          TopIcon={MessageSquare}
+          handleSubmit={handleSubmit}
+          topTitle="Welcome Back"
+          topSubtitle="Sign in to your account to continue"
+          loading={loading}
+          loadingBtnText="Signing In..."
+          notLoadingBtnText="Sign In"
+        >
+          <InputContainer label="Email" Icon={Mail}>
             <input
               type="text"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="grow placeholder:text-sm"
+              name="email-signup"
+              id="email-signup"
+              placeholder="jodndoe@gmail.com"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
             />
-          </div>
-          <button type="submit">Sign In</button>
-        </form>
+          </InputContainer>
+          <InputContainer label="Password" Icon={Lock}>
+            <input
+              type={isPasswordVisible ? "text" : "password"}
+              className="grow placeholder:text-sm"
+              required
+              placeholder="your password..."
+              name="password-signin"
+              id="password-signin"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="text-primary"
+            >
+              {isPasswordVisible ? <EyeOff size={24} /> : <Eye size={24} />}
+            </button>
+          </InputContainer>
+        </AuthForm>
+      </div>
+
+      <div
+        region="right"
+        className="flex items-center justify-center w-full h-full"
+      >
+        <AuthImagePattern
+          title="Let's Get You Connected"
+          subtitle="Start exploring all the features by getting into your account."
+          animation={animationTypes.spin}
+        />
       </div>
     </AuthLayout>
   );

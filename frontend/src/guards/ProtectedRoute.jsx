@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { authPageUrls } from "../../constants/pageUrls";
+import { authPageUrls } from "../constants/pageUrls";
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = true;

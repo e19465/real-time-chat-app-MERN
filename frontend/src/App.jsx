@@ -5,7 +5,7 @@ import {
   commonPageUrls,
   userPageUrls,
 } from "./constants/pageUrls";
-import ProtectedRoute from "./components/common/ProtectedRoute";
+import { PostAuthRestrictRoute, ProtectedRoute } from "./guards";
 import {
   // Common Pages
   HomePage,
@@ -43,20 +43,53 @@ const App = () => {
 
         {/********************************* - Auth Pages - ******************************************/}
 
-        <Route path={authPageUrls.signIn} element={<SignInPage />} />
-        <Route path={authPageUrls.signUp} element={<SignUpPage />} />
+        <Route
+          path={authPageUrls.signIn}
+          element={
+            <PostAuthRestrictRoute>
+              <SignInPage />
+            </PostAuthRestrictRoute>
+          }
+        />
+        <Route
+          path={authPageUrls.signUp}
+          element={
+            <PostAuthRestrictRoute>
+              <SignUpPage />
+            </PostAuthRestrictRoute>
+          }
+        />
         <Route
           path={authPageUrls.sendEmailVerification}
-          element={<SendEmailVerificationPage />}
+          element={
+            <PostAuthRestrictRoute>
+              <SendEmailVerificationPage />
+            </PostAuthRestrictRoute>
+          }
         />
-        <Route path={authPageUrls.verifyEmail} element={<VerifyEmailPage />} />
+        <Route
+          path={authPageUrls.verifyEmail}
+          element={
+            <PostAuthRestrictRoute>
+              <VerifyEmailPage />
+            </PostAuthRestrictRoute>
+          }
+        />
         <Route
           path={authPageUrls.sendPasswordResetEmail}
-          element={<SendPasswordResetEmailPage />}
+          element={
+            <PostAuthRestrictRoute>
+              <SendPasswordResetEmailPage />
+            </PostAuthRestrictRoute>
+          }
         />
         <Route
           path={authPageUrls.resetPassword}
-          element={<ResetPasswordPage />}
+          element={
+            <PostAuthRestrictRoute>
+              <ResetPasswordPage />
+            </PostAuthRestrictRoute>
+          }
         />
 
         {/************************ - User Account Related Pages - **********************************/}

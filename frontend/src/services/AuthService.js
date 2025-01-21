@@ -2,13 +2,13 @@ import axiosInstance from "../interceptors/jwtInterceptor";
 
 class AuthService {
   // The register method
-  async register(fullName, email, password, confirmPassword) {
+  async register(formData) {
     try {
       const response = await axiosInstance.post("/auth/register", {
-        fullName,
-        email,
-        password,
-        confirmPassword,
+        fullName: formData.fullName,
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
       });
       return response.data;
     } catch (error) {
@@ -18,11 +18,11 @@ class AuthService {
   }
 
   // The login method
-  async login(email, password) {
+  async login(formData) {
     try {
       const response = await axiosInstance.post("/auth/login", {
-        email,
-        password,
+        email: formData.email,
+        password: formData.password,
       });
       return response.data;
     } catch (error) {
