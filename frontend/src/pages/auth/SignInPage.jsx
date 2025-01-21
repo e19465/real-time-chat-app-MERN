@@ -11,6 +11,8 @@ import AuthImagePattern from "../../components/auth/AuthImagePattern";
 import { animationTypes } from "../../constants/shared";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthForm from "../../components/auth/AuthForm";
+import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
+import UsefullLinks from "../../components/auth/UsefullLinks";
 
 const SignInPage = () => {
   //! Hooks
@@ -50,7 +52,7 @@ const SignInPage = () => {
 
   return (
     <AuthLayout>
-      <div region="left" className="w-full h-full flex flex-col">
+      <LeftRegionContainer region="left">
         <AuthForm
           TopIcon={MessageSquare}
           handleSubmit={handleSubmit}
@@ -96,7 +98,14 @@ const SignInPage = () => {
             </button>
           </InputContainer>
         </AuthForm>
-      </div>
+        <div className="w-full h-auto mt-2">
+          <UsefullLinks
+            showSignUp={true}
+            showResetPassword={true}
+            showVerifyEmail={true}
+          />
+        </div>
+      </LeftRegionContainer>
 
       <div
         region="right"

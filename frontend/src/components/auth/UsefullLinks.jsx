@@ -4,12 +4,13 @@ import LinkLi from "./LinkLi";
 const UsefullLinks = ({
   showSignUp = false,
   showSignIn = false,
+  showSendEmailVerification = false,
   showVerifyEmail = false,
   showResetPassword = false,
   showSendPasswordResetEmail = false,
 }) => {
   return (
-    <div className="w-full flex flex-col items-center justify-center gap-0">
+    <div className="w-full flex flex-col items-center justify-center gap-[0.5]">
       <ul className="list-none">
         {showSignUp && (
           <LinkLi
@@ -25,11 +26,18 @@ const UsefullLinks = ({
             linkText="Sign in"
           />
         )}
+        {showSendEmailVerification && (
+          <LinkLi
+            link={authPageUrls.sendEmailVerification}
+            title="Didn't receive verification email?"
+            linkText="Send"
+          />
+        )}
         {showVerifyEmail && (
           <LinkLi
             link={authPageUrls.verifyEmail}
-            title="Didn't verify your email yet?"
-            linkText="Verify email"
+            title="Email not verified?"
+            linkText="Verify"
           />
         )}
         {showResetPassword && (

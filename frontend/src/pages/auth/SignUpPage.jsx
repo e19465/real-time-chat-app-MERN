@@ -21,6 +21,7 @@ import { animationTypes } from "../../constants/shared";
 import UsefullLinks from "../../components/auth/UsefullLinks";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthForm from "../../components/auth/AuthForm";
+import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 
 const SignUpPage = () => {
   //! Hooks
@@ -67,7 +68,7 @@ const SignUpPage = () => {
 
   return (
     <AuthLayout>
-      <div region="left" className="w-full h-full flex flex-col">
+      <LeftRegionContainer region="left">
         <AuthForm
           handleSubmit={handleSubmit}
           TopIcon={MessageSquare}
@@ -153,7 +154,10 @@ const SignUpPage = () => {
             </button>
           </InputContainer>
         </AuthForm>
-      </div>
+        <div className="w-full h-auto mt-2">
+          <UsefullLinks showSignIn={true} />
+        </div>
+      </LeftRegionContainer>
 
       <div
         region="right"
