@@ -8,7 +8,7 @@ import {
 import { authPageUrls } from "../../constants/pageUrls";
 import { useNavigate } from "react-router-dom";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
-import { Mail, MessageSquare } from "lucide-react";
+import { Key, Mail, MessageSquare } from "lucide-react";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
 import { animationTypes, localStorageKeys } from "../../constants/shared";
@@ -70,7 +70,7 @@ const VerifyEmailPage = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </InputContainer>
-          <InputContainer label="OTP" Icon={Mail}>
+          <InputContainer label="OTP" Icon={Key}>
             <input
               type="text"
               className="grow placeholder:text-sm"

@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { authPageUrls } from "../../constants/pageUrls";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 import AuthForm from "../../components/auth/AuthForm";
-import { Eye, EyeOff, Lock, Mail, MessageSquare } from "lucide-react";
+import { Eye, EyeOff, Key, Lock, Mail, MessageSquare } from "lucide-react";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
 import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
@@ -86,7 +86,7 @@ const ResetPasswordPage = () => {
               }
             />
           </InputContainer>
-          <InputContainer label="OTP" Icon={Mail}>
+          <InputContainer label="OTP" Icon={Key}>
             <input
               type="text"
               required
