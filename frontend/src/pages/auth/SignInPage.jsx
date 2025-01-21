@@ -103,6 +103,7 @@ const SignInPage = () => {
             showSignUp={true}
             showResetPassword={true}
             showVerifyEmail={true}
+            showSendEmailVerification={true}
           />
         </div>
       </LeftRegionContainer>

@@ -10,7 +10,7 @@ const UsefullLinks = ({
   showSendPasswordResetEmail = false,
 }) => {
   return (
-    <div className="w-full flex flex-col items-center justify-center gap-[0.5]">
+    <div className="w-full flex flex-col items-center justify-center gap-1">
       <ul className="list-none">
         {showSignUp && (
           <LinkLi
