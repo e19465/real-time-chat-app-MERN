@@ -127,9 +127,10 @@ class AuthService {
 
   // set user details in local storage
   setUserInfoToLocalStorage(data) {
-    localStorage.setItem(localStorageKeys.USER_ID, data?.userId);
-    localStorage.setItem(localStorageKeys.USER_EMAIL, data?.userEmail);
-    localStorage.setItem(localStorageKeys.USER_FULL_NAME, data?.userFullName);
+    console.log("data: ", data);
+    localStorage.setItem(localStorageKeys.USER_ID, data?._id);
+    localStorage.setItem(localStorageKeys.USER_EMAIL, data?.email);
+    localStorage.setItem(localStorageKeys.USER_FULL_NAME, data?.fullName);
   }
 }
 

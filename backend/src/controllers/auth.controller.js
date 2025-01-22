@@ -63,7 +63,7 @@ class AuthController {
       return SuccessHandler.handle200(
         "Login successful",
         {
-          id: user._id,
+          _id: user._id,
           email: user.email,
           fullName: user.fullName,
         },

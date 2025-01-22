@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import AuthService from "../services/AuthService";
 
 export const authPageUrls = {
@@ -15,15 +14,13 @@ export const userPageUrls = {
   userProfile: "/profile/:userId",
 };
 
-export const getOwnProfileUrl = async () => {
+export const getOwnProfileUrl = () => {
   const userInfo = AuthService.getUserInfoFromLocalStorage();
   const userId = userInfo?.userId;
-  console.log("called getProfileUrl with userId: ", userId);
   if (userId) {
     return userPageUrls.userProfile.replace(":userId", userId);
   } else {
     localStorage.clear();
-    toast.info("Session expired, login again");
     window.location.href = authPageUrls.signIn;
   }
 };
