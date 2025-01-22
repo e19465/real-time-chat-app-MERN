@@ -41,7 +41,7 @@ const Navbar = () => {
   return (
     <div className="w-full h-full flex items-center justify-between px-12 bg-base-300">
       {/* Left Logo */}
-      <div className="font-mono font-semibold tracking-widest relative text-blue-500 text-xl animate-moveRightLeft">
+      <div className="font-mono font-semibold tracking-widest relative text-blue-500 text-lg animate-moveRightLeft">
         <Link to={commonPageUrls.home}>
           <span className="shine-effect relative">Chatty</span>
         </Link>
