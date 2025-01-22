@@ -1,3 +1,4 @@
+import { localStorageKeys } from "../constants/shared";
 import axiosInstance from "../interceptors/jwtInterceptor";
 
 class AuthService {
@@ -114,6 +115,21 @@ class AuthService {
       console.error("Error in changePassword: ", err);
       throw err;
     }
+  }
+
+  // Get user details from local storage
+  getUserInfoFromLocalStorage() {
+    const userId = localStorage.getItem(localStorageKeys.USER_ID);
+    const userEmail = localStorage.getItem(localStorageKeys.USER_EMAIL);
+    const userFullName = localStorage.getItem(localStorageKeys.USER_FULL_NAME);
+    return { userId, userEmail, userFullName };
+  }
+
+  // set user details in local storage
+  setUserInfoToLocalStorage(data) {
+    localStorage.setItem(localStorageKeys.USER_ID, data?.userId);
+    localStorage.setItem(localStorageKeys.USER_EMAIL, data?.userEmail);
+    localStorage.setItem(localStorageKeys.USER_FULL_NAME, data?.userFullName);
   }
 }
 

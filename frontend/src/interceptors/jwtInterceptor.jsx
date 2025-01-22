@@ -1,5 +1,6 @@
 import axios from "axios";
 import { authPageUrls } from "../constants/pageUrls";
+import { globalErrorHandler } from "../helpers/responseHandler";
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const axiosInstance = axios.create({
@@ -39,7 +40,12 @@ axiosInstance.interceptors.response.use(
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         // Handle refresh errors by redirecting to the login page.
-        console.log("Token refresh failed:", refreshError);
+        globalErrorHandler(
+          refreshError,
+          "Token refresh failed",
+          "Session Expired"
+        );
+        localStorage.clear();
         window.location.href = authPageUrls.signIn;
         return Promise.reject(refreshError);
       }

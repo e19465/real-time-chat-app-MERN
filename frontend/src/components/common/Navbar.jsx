@@ -8,8 +8,9 @@ import {
   globalSuccessHandler,
 } from "../../helpers/responseHandler";
 import {
+  authPageUrls,
   commonPageUrls,
-  getProfileUrl,
+  getOwnProfileUrl,
   userPageUrls,
 } from "../../constants/pageUrls";
 
@@ -54,7 +55,7 @@ const Navbar = () => {
         <Link to={userPageUrls.settings} title="Settings">
           <Settings className="size-6" />
         </Link>
-        <Link to={getProfileUrl(123456)} title="Profile">
+        <Link to={getOwnProfileUrl()} title="Profile">
           <User className="size-6" />
         </Link>
       </div>

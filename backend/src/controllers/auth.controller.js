@@ -60,7 +60,15 @@ class AuthController {
       });
 
       // send success response with tokens
-      return SuccessHandler.handle200("Login successful", null, res);
+      return SuccessHandler.handle200(
+        "Login successful",
+        {
+          id: user._id,
+          email: user.email,
+          fullName: user.fullName,
+        },
+        res
+      );
     } catch (err) {
       console.log("Error logging in", err);
       return ErrorHandler.handle500AndCustomError(err, res);

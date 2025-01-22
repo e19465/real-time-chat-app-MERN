@@ -21,7 +21,7 @@ const VerifyEmailPage = () => {
 
   //! State variables
   const [email, setEmail] = useState(
-    localStorage.getItem("email_ver_otp_send_email") || ""
+    localStorage.getItem(localStorageKeys.EMAIL_VER_OTP_SEND_EMAIL) || ""
   );
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);

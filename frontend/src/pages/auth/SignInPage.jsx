@@ -38,6 +38,7 @@ const SignInPage = () => {
       setLoading(true);
       const response = await AuthService.login(formData);
       globalSuccessHandler(response, "Login successful");
+      AuthService.setUserInfoToLocalStorage(response.data);
       navigate("/", { replace: true });
     } catch (err) {
       globalErrorHandler(
