@@ -32,7 +32,7 @@ const Navbar = () => {
     } catch (error) {
       globalErrorHandler(error);
     } finally {
-      localStorage.clear();
+      AuthService.clearSessionData();
       setIsModalOpen(false);
       setIsLoading(false);
       navigate(authPageUrls.signIn);

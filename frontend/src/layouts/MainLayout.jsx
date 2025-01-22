@@ -6,7 +6,7 @@ const MainLayout = ({ children }) => {
       <div className="w-full h-[50px]">
         <Navbar />
       </div>
-      <div className="w-full min-h-[calc(100%-50px)] h-auto overflow-y-auto">
+      <div className="w-full min-h-[calc(100%-50px)] h-auto overflow-y-auto flex items-center justify-center">
         {children}
       </div>
     </div>

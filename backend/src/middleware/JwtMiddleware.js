@@ -1,5 +1,6 @@
 const JwtHandler = require("../helpers/JwtHandler");
 const ErrorHandler = require("../helpers/ErrorHandler");
+const { isValidObjectId } = require("../helpers/Utils");
 
 class JwtMiddleware {
   constructor() {
@@ -33,7 +34,10 @@ class JwtMiddleware {
   verifyTokenAndAccountId(req, res, next) {
     this.verifyAccessToken(req, res, () => {
       if (req.params.userId) {
-        if (req.user.userId === req.params.userId) {
+        // check for valid object id
+        if (!isValidObjectId(req.params.userId)) {
+          return ErrorHandler.handle400("Invalid user id", res);
+        } else if (req.user.userId === req.params.userId) {
           next();
         } else {
           return ErrorHandler.handle403("Forbidden", res);

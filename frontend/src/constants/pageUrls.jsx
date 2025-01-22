@@ -20,7 +20,7 @@ export const getOwnProfileUrl = () => {
   if (userId) {
     return userPageUrls.userProfile.replace(":userId", userId);
   } else {
-    localStorage.clear();
+    AuthService.clearSessionData();
     window.location.href = authPageUrls.signIn;
   }
 };

@@ -2,6 +2,7 @@ const ErrorHandler = require("../helpers/ErrorHandler");
 const User = require("../models/User");
 const SuccessHandler = require("../helpers/SuccessHandler");
 const FileService = require("../services/FileService");
+const { isValidObjectId } = require("../helpers/Utils");
 
 class UserController {
   //! get user profile (Authorized user)
@@ -9,18 +10,25 @@ class UserController {
     try {
       // obtain the current user id from the request and check if user exists else return an error
       const userId = req.params.userId;
+
+      // check for valid object id
+      if (!isValidObjectId(userId)) {
+        return ErrorHandler.handle400("Invalid user id", res);
+      }
+
       const user = await User.findById(userId);
       if (!user) {
         return ErrorHandler.handle404("User not found", res);
       }
 
       // get info without password
-      const { password, ...rest } = user._doc;
+      const { email, fullName, profilePic, _id, createdAt } = user._doc;
+      const data = { email, fullName, profilePic, _id, createdAt };
 
       // return a success response with the user profile info
       return SuccessHandler.handle200(
         "User profile info fetched successfully",
-        rest,
+        data,
         res
       );
     } catch (err) {

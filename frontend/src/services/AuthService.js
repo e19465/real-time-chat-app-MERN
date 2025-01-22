@@ -1,3 +1,4 @@
+import { authPageUrls } from "../constants/pageUrls";
 import { localStorageKeys } from "../constants/shared";
 import axiosInstance from "../interceptors/jwtInterceptor";
 
@@ -127,10 +128,30 @@ class AuthService {
 
   // set user details in local storage
   setUserInfoToLocalStorage(data) {
-    console.log("data: ", data);
     localStorage.setItem(localStorageKeys.USER_ID, data?._id);
     localStorage.setItem(localStorageKeys.USER_EMAIL, data?.email);
     localStorage.setItem(localStorageKeys.USER_FULL_NAME, data?.fullName);
+  }
+
+  // get who logged in
+  isLoggedInUser(loggedInUserId) {
+    const userId = localStorage.getItem(localStorageKeys.USER_ID);
+    if (!userId) {
+      localStorage.clear();
+      window.location.href = authPageUrls.signIn;
+    }
+    return userId === loggedInUserId;
+  }
+
+  // clear session data, localStorage, sessionStorage, and cookies
+  clearSessionData() {
+    localStorage.clear();
+    sessionStorage.clear();
+    document.cookie.split(";").forEach(function (c) {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
   }
 }
 
