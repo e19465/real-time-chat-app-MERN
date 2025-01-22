@@ -12,6 +12,8 @@ export const userPageUrls = {
   userProfile: "/profile/:userId",
 };
 
+export const getProfileUrl = (userId) => `/profile/${userId}`;
+
 export const commonPageUrls = {
   home: "/",
 };

@@ -5,6 +5,7 @@ export const animationTypes = {
   pulse: "animate-pulse",
   wiggle: "animate-wiggle",
   shake: "animate-shake",
+  moveRightLeft: "animate-moveRightLeft",
 };
 
 export const localStorageKeys = {

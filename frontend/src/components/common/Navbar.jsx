@@ -1,13 +1,17 @@
 import { useState } from "react";
 import Modal from "./Modal";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthService from "../../services/AuthService";
-import { LogOut } from "lucide-react";
+import { LogOut, DoorOpen, User, Settings } from "lucide-react";
 import {
   globalErrorHandler,
   globalSuccessHandler,
 } from "../../helpers/responseHandler";
-import { authPageUrls } from "../../constants/pageUrls";
+import {
+  commonPageUrls,
+  getProfileUrl,
+  userPageUrls,
+} from "../../constants/pageUrls";
 
 const Navbar = () => {
   //! Hooks
@@ -35,14 +39,24 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-between px-6">
-      {/* Left */}
-      <div>Chatty</div>
+    <div className="w-full h-full flex items-center justify-between px-12 bg-base-300">
+      {/* Left Logo */}
+      <div className="font-mono font-semibold tracking-widest relative text-blue-500 text-xl animate-moveRightLeft">
+        <Link to={commonPageUrls.home}>
+          <span className="shine-effect relative">Chatty</span>
+        </Link>
+      </div>
       {/* Right */}
-      <div>
+      <div className="flex items-center justify-center gap-4" title="Logout">
         <button type="button" onClick={() => setIsModalOpen(true)}>
-          Logout
+          <DoorOpen className="size-6" />
         </button>
+        <Link to={userPageUrls.settings} title="Settings">
+          <Settings className="size-6" />
+        </Link>
+        <Link to={getProfileUrl(123456)} title="Profile">
+          <User className="size-6" />
+        </Link>
       </div>
       {/* Logout Modal */}
       {isModalOpen && (
