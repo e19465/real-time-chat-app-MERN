@@ -13,6 +13,7 @@ import {
   getOwnProfileUrl,
   userPageUrls,
 } from "../../constants/pageUrls";
+import { ProgressLink } from "../nprogress/NProgressHandler";
 
 const Navbar = () => {
   //! Hooks
@@ -43,21 +44,21 @@ const Navbar = () => {
     <div className="w-full h-full flex items-center justify-between px-12 bg-base-300">
       {/* Left Logo */}
       <div className="font-mono font-semibold tracking-widest relative text-blue-500 text-lg animate-moveRightLeft">
-        <Link to={commonPageUrls.home}>
+        <ProgressLink to={commonPageUrls.home}>
           <span className="shine-effect relative">Chatty</span>
-        </Link>
+        </ProgressLink>
       </div>
       {/* Right */}
       <div className="flex items-center justify-center gap-4" title="Logout">
         <button type="button" onClick={() => setIsModalOpen(true)}>
           <DoorOpen className="size-6" />
         </button>
-        <Link to={userPageUrls.settings} title="Settings">
+        <ProgressLink to={userPageUrls.settings} title="Settings">
           <Settings className="size-6" />
-        </Link>
-        <Link to={getOwnProfileUrl()} title="Profile">
+        </ProgressLink>
+        <ProgressLink to={getOwnProfileUrl()} title="Profile">
           <User className="size-6" />
-        </Link>
+        </ProgressLink>
       </div>
       {/* Logout Modal */}
       {isModalOpen && (

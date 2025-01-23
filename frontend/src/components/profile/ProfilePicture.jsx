@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import NO_AVATAR from "../../../public/noavatar.webp";
 import { Camera } from "lucide-react";
 import UserService from "../../services/UserService";
 import { toast } from "react-toastify";
@@ -12,7 +11,7 @@ import { backendNeededKeys } from "../../constants/shared";
 
 const ProfilePicture = ({ isOwnerProfile, profilePicUrl }) => {
   //! State variables
-  const [imgUrl, setImgUrl] = useState(profilePicUrl || NO_AVATAR);
+  const [imgUrl, setImgUrl] = useState(null);
   const [imageFile, setImageFile] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -20,8 +19,6 @@ const ProfilePicture = ({ isOwnerProfile, profilePicUrl }) => {
   useEffect(() => {
     if (profilePicUrl) {
       setImgUrl(profilePicUrl);
-    } else {
-      setImgUrl(NO_AVATAR);
     }
   }, [profilePicUrl]);
 
@@ -65,7 +62,7 @@ const ProfilePicture = ({ isOwnerProfile, profilePicUrl }) => {
     >
       <div className="w-24 h-24 relative">
         <img
-          src={imgUrl}
+          src={imgUrl ? imgUrl : "/noavatar.webp"}
           alt="profile"
           className="w-24 h-24 rounded-full object-cover border border-gray-800"
           loading="lazy"

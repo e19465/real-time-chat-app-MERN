@@ -23,12 +23,13 @@ import {
   UserProfilePage,
   UserSettingsPage,
 } from "./pages";
+import NProgressDoneComponent from "./components/nprogress/NProgressDoneComponent";
 
 const App = () => {
   return (
     <div className="w-full min-h-screen h-auto">
       <ToastContainer theme="light" />
-
+      <NProgressDoneComponent />
       <Routes>
         {/******************************* - Common Pages - ******************************************/}
         <Route
