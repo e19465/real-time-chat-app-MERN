@@ -14,7 +14,7 @@ import {
   UserPageUrls,
 } from "../../constants/pageUrls";
 import { ProgressLink } from "../nprogress/NProgressHandler";
-import ThemeChange from "../profile/ThemeChange";
+import ThemeChange from "./ThemeChange";
 
 const Navbar = () => {
   //! Hooks
@@ -44,7 +44,7 @@ const Navbar = () => {
   return (
     <div className="w-full h-full flex items-center justify-between px-12 bg-base-300">
       {/* Left Logo */}
-      <div className="font-mono font-semibold tracking-widest relative text-blue-500 text-lg animate-moveRightLeft">
+      <div className="font-mono font-semibold tracking-widest relative text-lg animate-moveRightLeft">
         <ProgressLink to={CommonPageUrls.home}>
           <span className="shine-effect relative">Chatty</span>
         </ProgressLink>

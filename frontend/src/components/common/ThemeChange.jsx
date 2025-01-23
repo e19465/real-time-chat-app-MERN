@@ -42,6 +42,12 @@ const ThemeChange = () => {
     };
   }, [themesVisible]);
 
+  //! Function to set theme
+  const handleSetTheme = (theme) => {
+    setTheme(theme);
+    setThemesVisible(false);
+  };
+
   return (
     <div className="w-max flex flex-wrap items-center justify-center relative">
       <button ref={buttonRef} onClick={handleShowThemes}>
@@ -64,7 +70,7 @@ const ThemeChange = () => {
               group flex gap-1 items-center p-2 rounded-lg transition-colors
               ${theme === t ? "bg-base-200" : "hover:bg-base-200/50"}
             `}
-              onClick={() => setTheme(t)}
+              onClick={() => handleSetTheme(t)}
             >
               <div
                 className="relative h-8 w-full rounded-md overflow-hidden"

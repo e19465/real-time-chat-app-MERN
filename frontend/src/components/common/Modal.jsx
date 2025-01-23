@@ -39,7 +39,7 @@ const Modal = ({
                 <button
                   disabled={isLoading}
                   onClick={handleAccept}
-                  className={`bg-base-200 border border-gray-400 px-6 py-2.5 text-sm text-white rounded shadow-sm hover:bg-white hover:text-black transition-colors duration-300 ${
+                  className={`bg-base-100 border border-gray-400 px-6 py-2.5 text-sm rounded shadow-sm hover:bg-base-300 transition-colors duration-300 ${
                     isLoading && "cursor-not-allowed"
                   }`}
                 >
