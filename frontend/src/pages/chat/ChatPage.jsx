@@ -1,7 +1,7 @@
 import MainLayout from "../../layouts/MainLayout";
 import { useChatStore } from "../../store/useChatStore";
 import ChatContainer from "../../components/chat/ChatContainer";
-import Sidebar from "../../components/home/Sidebar";
+import Sidebar from "../../components/common/Sidebar";
 import { useParams } from "react-router-dom";
 
 const ChatPage = () => {
