@@ -133,16 +133,6 @@ class AuthService {
     localStorage.setItem(localStorageKeys.USER_FULL_NAME, data?.fullName);
   }
 
-  // get who logged in
-  isLoggedInUser(loggedInUserId) {
-    const userId = localStorage.getItem(localStorageKeys.USER_ID);
-    if (!userId) {
-      localStorage.clear();
-      window.location.href = authPageUrls.signIn;
-    }
-    return userId === loggedInUserId;
-  }
-
   // clear session data, localStorage, sessionStorage, and cookies
   clearSessionData() {
     localStorage.clear();

@@ -37,6 +37,13 @@ authRouter.post(
   AuthController.refreshTokens
 );
 
+// change password endpoint
+authRouter.post(
+  "/change-password",
+  JwtMiddleware.verifyAccessToken,
+  AuthController.changePassword
+);
+
 /**
  * Complete end points for the auth route
  * 1. Register - POST - http://localhost:5000/api/auth/register
@@ -47,6 +54,7 @@ authRouter.post(
  * 6. Send Password Reset OTP - POST - http://localhost:5000/api/auth/send-password-reset-otp
  * 7. Reset Password - POST - http://localhost:5000/api/auth/reset-password
  * 8. Refresh Tokens - POST - http://localhost:5000/api/auth/refresh-tokens
+ * 9. Change Password - POST - http://localhost:5000/api/auth/change-password
  */
 
 module.exports = authRouter;

@@ -1,5 +1,3 @@
-import React from "react";
-
 const InputContainer = ({
   children,
   label,
@@ -17,7 +15,9 @@ const InputContainer = ({
         className={`w-full h-[45px] input input-bordered flex items-center gap-2 ${classNameLabel}`}
       >
         <Icon size={24} className="text-primary" />
-        {children}
+        <div className="flex-grow flex items-center justify-between">
+          {children}
+        </div>
       </label>
     </div>
   );

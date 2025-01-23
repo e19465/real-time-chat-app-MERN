@@ -321,8 +321,7 @@ class AuthController {
   async changePassword(req, res) {
     try {
       // Get user from request (from token verification), if not present return 401
-      const user = req.user;
-      const userId = user.userId;
+      const userId = req.user.userId;
       if (!userId) {
         return ErrorHandler.handle401("Invalid user", res);
       }
