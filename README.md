@@ -17,6 +17,7 @@ A real-time chat application built using the MERN stack. This app allows users t
 - **Best Practices**: The app follows best practices in both frontend and backend development for maintainability and scalability.
 - **Cookie-Based Authentication**:  
   The application uses **cookie-based authentication** to securely store JWT tokens in **HttpOnly cookies**, preventing access via JavaScript and reducing the risk of **Cross-Site Scripting (XSS)** and **Cross-Site Request Forgery (CSRF)** attacks. This ensures seamless login while protecting sensitive information.
+- **Zoostand**: State Management Tool in Frontend
 
 ---
 
