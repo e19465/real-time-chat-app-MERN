@@ -2,6 +2,7 @@ import axios from "axios";
 import { AuthPageUrls } from "../constants/pageUrls";
 import { globalErrorHandler } from "../helpers/responseHandler";
 import AuthService from "../services/AuthService";
+import { useAuthStore } from "../store/useAuthStore";
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const axiosInstance = axios.create({
@@ -46,7 +47,8 @@ axiosInstance.interceptors.response.use(
           "Token refresh failed",
           "Session Expired"
         );
-        AuthService.clearSessionData();
+        const { clearSessionData } = useAuthStore();
+        clearSessionData();
         window.location.href = AuthPageUrls.signIn;
         return Promise.reject(refreshError);
       }

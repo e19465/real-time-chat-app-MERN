@@ -1,4 +1,5 @@
 import AuthService from "../services/AuthService";
+import { useAuthStore } from "../store/useAuthStore";
 
 export const AuthPageUrls = {
   signIn: "/auth/sign-in",
@@ -19,12 +20,11 @@ export const CommonPageUrls = {
 };
 
 export const getOwnProfileUrl = () => {
-  const userInfo = AuthService.getUserInfoFromLocalStorage();
-  const userId = userInfo?.userId;
+  const { userId, clearSessionData } = useAuthStore.getState();
   if (userId) {
     return UserPageUrls.userProfile.replace(":userId", userId);
   } else {
-    AuthService.clearSessionData();
+    clearSessionData();
     window.location.href = AuthPageUrls.signIn;
   }
 };

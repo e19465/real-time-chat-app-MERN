@@ -15,10 +15,12 @@ import {
 } from "../../constants/pageUrls";
 import { ProgressLink } from "../nprogress/NProgressHandler";
 import ThemeChange from "./ThemeChange";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const Navbar = () => {
   //! Hooks
   const navigate = useNavigate();
+  const { clearSessionData } = useAuthStore();
 
   //! State variables
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +36,7 @@ const Navbar = () => {
     } catch (error) {
       globalErrorHandler(error);
     } finally {
-      AuthService.clearSessionData();
+      clearSessionData();
       setIsModalOpen(false);
       setIsLoading(false);
       navigate(AuthPageUrls.signIn);

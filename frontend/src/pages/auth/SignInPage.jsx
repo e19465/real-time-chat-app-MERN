@@ -13,10 +13,12 @@ import InputContainer from "../../components/auth/InputContainer";
 import AuthForm from "../../components/auth/AuthForm";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const SignInPage = () => {
   //! Hooks
   const navigate = useNavigate();
+  const { setUserInfoToLocalStorage } = useAuthStore();
 
   //! State variables
   const [formData, setFormData] = useState({
@@ -38,7 +40,7 @@ const SignInPage = () => {
       setLoading(true);
       const response = await AuthService.login(formData);
       globalSuccessHandler(response, "Login successful");
-      AuthService.setUserInfoToLocalStorage(response.data);
+      setUserInfoToLocalStorage(response.data);
       navigate("/", { replace: true });
     } catch (err) {
       globalErrorHandler(
