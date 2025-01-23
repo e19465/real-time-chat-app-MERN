@@ -1,4 +1,3 @@
-import AuthService from "../services/AuthService";
 import { useAuthStore } from "../store/useAuthStore";
 
 export const AuthPageUrls = {
@@ -17,6 +16,11 @@ export const UserPageUrls = {
 
 export const CommonPageUrls = {
   home: "/",
+  singleChat: "/chat/:userId",
+};
+
+export const getChatUrl = (userId) => {
+  return CommonPageUrls.singleChat.replace(":userId", userId);
 };
 
 export const getOwnProfileUrl = () => {
