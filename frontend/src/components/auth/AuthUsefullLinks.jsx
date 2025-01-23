@@ -1,4 +1,4 @@
-import { authPageUrls } from "../../constants/pageUrls";
+import { AuthPageUrls } from "../../constants/pageUrls";
 import LinkLi from "./LinkLi";
 
 const AuthUsefullLinks = ({
@@ -20,7 +20,7 @@ const AuthUsefullLinks = ({
       <ul className="list-none w-full flex flex-col gap-1">
         {showSignUp && (
           <LinkLi
-            link={authPageUrls.signUp}
+            link={AuthPageUrls.signUp}
             title={
               showSignUp.message ? showSignUp.message : defaultSignUpMessage
             }
@@ -29,7 +29,7 @@ const AuthUsefullLinks = ({
         )}
         {showSignIn && (
           <LinkLi
-            link={authPageUrls.signIn}
+            link={AuthPageUrls.signIn}
             title={
               showSignIn.message ? showSignIn.message : defaultSignInMessage
             }
@@ -38,7 +38,7 @@ const AuthUsefullLinks = ({
         )}
         {showSendEmailVerification && (
           <LinkLi
-            link={authPageUrls.sendEmailVerification}
+            link={AuthPageUrls.sendEmailVerification}
             title={
               showSendEmailVerification.message
                 ? showSendEmailVerification.message
@@ -49,7 +49,7 @@ const AuthUsefullLinks = ({
         )}
         {showVerifyEmail && (
           <LinkLi
-            link={authPageUrls.verifyEmail}
+            link={AuthPageUrls.verifyEmail}
             title={
               showVerifyEmail.message
                 ? showVerifyEmail.message
@@ -60,7 +60,7 @@ const AuthUsefullLinks = ({
         )}
         {showResetPassword && (
           <LinkLi
-            link={authPageUrls.resetPassword}
+            link={AuthPageUrls.resetPassword}
             title={
               showResetPassword.message
                 ? showResetPassword.message
@@ -71,7 +71,7 @@ const AuthUsefullLinks = ({
         )}
         {showSendPasswordResetEmail && (
           <LinkLi
-            link={authPageUrls.sendPasswordResetEmail}
+            link={AuthPageUrls.sendPasswordResetEmail}
             title={
               showSendPasswordResetEmail.message
                 ? showSendPasswordResetEmail.message

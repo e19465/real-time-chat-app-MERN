@@ -1,13 +1,13 @@
 import { useState } from "react";
 import AuthLayout from "../../layouts/AuthLayout";
-import { animationTypes, localStorageKeys } from "../../constants/shared";
+import { AnimationTypes, LocalStorageKeys } from "../../constants/shared";
 import AuthService from "../../services/AuthService";
 import {
   globalErrorHandler,
   globalSuccessHandler,
 } from "../../helpers/responseHandler";
 import { useNavigate } from "react-router-dom";
-import { authPageUrls } from "../../constants/pageUrls";
+import { AuthPageUrls } from "../../constants/pageUrls";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 import AuthForm from "../../components/auth/AuthForm";
 import { Eye, EyeOff, Key, Lock, Mail, MessageSquare } from "lucide-react";
@@ -22,7 +22,7 @@ const ResetPasswordPage = () => {
   //! State variables
   const [formData, setFormData] = useState({
     email:
-      localStorage.getItem(localStorageKeys.PASSWORD_VER_OTP_SEND_EMAIL) || "",
+      localStorage.getItem(LocalStorageKeys.PASSWORD_VER_OTP_SEND_EMAIL) || "",
     otp: "",
     password: "",
     confirmPassword: "",
@@ -47,8 +47,8 @@ const ResetPasswordPage = () => {
       setLoading(true);
       const response = await AuthService.resetPassword(formData);
       globalSuccessHandler(response, "Password reset successful");
-      localStorage.removeItem(localStorageKeys.PASSWORD_VER_OTP_SEND_EMAIL);
-      navigate(authPageUrls.signIn);
+      localStorage.removeItem(LocalStorageKeys.PASSWORD_VER_OTP_SEND_EMAIL);
+      navigate(AuthPageUrls.signIn);
     } catch (err) {
       globalErrorHandler(
         err,
@@ -166,7 +166,7 @@ const ResetPasswordPage = () => {
         <AuthImagePattern
           title="Reset Your Password"
           subtitle="Enter a new password to secure your account. Your new password will help you get back to your account."
-          animation={animationTypes.ping}
+          animation={AnimationTypes.ping}
         />
       </div>
     </AuthLayout>

@@ -8,8 +8,8 @@ import {
   globalErrorHandler,
   globalSuccessHandler,
 } from "../../helpers/responseHandler";
-import { animationTypes, localStorageKeys } from "../../constants/shared";
-import { authPageUrls } from "../../constants/pageUrls";
+import { AnimationTypes, LocalStorageKeys } from "../../constants/shared";
+import { AuthPageUrls } from "../../constants/pageUrls";
 import { Mail, MessageSquare } from "lucide-react";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
@@ -33,8 +33,8 @@ const SendPasswordResetEmailPage = () => {
         response,
         "Password reset OTP has been successfully sent to your email"
       );
-      localStorage.setItem(localStorageKeys.PASSWORD_VER_OTP_SEND_EMAIL, email);
-      navigate(authPageUrls.resetPassword);
+      localStorage.setItem(LocalStorageKeys.PASSWORD_VER_OTP_SEND_EMAIL, email);
+      navigate(AuthPageUrls.resetPassword);
     } catch (err) {
       globalErrorHandler(
         err,
@@ -92,7 +92,7 @@ const SendPasswordResetEmailPage = () => {
         <AuthImagePattern
           title="Forgot Your Password?"
           subtitle="No worries! We'll send you an email to reset your password and regain access."
-          animation={animationTypes.wiggle}
+          animation={AnimationTypes.wiggle}
         />
       </div>
     </AuthLayout>

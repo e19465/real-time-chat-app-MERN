@@ -7,7 +7,7 @@ import {
   globalSuccessHandler,
 } from "../../helpers/responseHandler";
 import LoadingText from "../common/LoadingText";
-import { backendNeededKeys } from "../../constants/shared";
+import { BackendNeededKeys } from "../../constants/shared";
 
 const ProfilePicture = ({ isOwnerProfile, profilePicUrl }) => {
   //! State variables
@@ -41,7 +41,7 @@ const ProfilePicture = ({ isOwnerProfile, profilePicUrl }) => {
     try {
       setLoading(true);
       let formData = new FormData();
-      formData.append(backendNeededKeys.DP_FORM_DATA_KEY, imageFile);
+      formData.append(BackendNeededKeys.DP_FORM_DATA_KEY, imageFile);
       const response = await UserService.updateProfilePicture(formData);
       globalSuccessHandler(response, "Profile picture updated");
     } catch (err) {

@@ -8,7 +8,7 @@ import {
 } from "../../helpers/responseHandler";
 import { Eye, EyeOff, Loader, Lock, Mail, MessageSquare } from "lucide-react";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
-import { animationTypes } from "../../constants/shared";
+import { AnimationTypes } from "../../constants/shared";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthForm from "../../components/auth/AuthForm";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
@@ -124,7 +124,7 @@ const SignInPage = () => {
         <AuthImagePattern
           title="Let's Get You Connected"
           subtitle="Start connecting with your loved ones by getting into your account."
-          animation={animationTypes.spin}
+          animation={AnimationTypes.spin}
         />
       </div>
     </AuthLayout>

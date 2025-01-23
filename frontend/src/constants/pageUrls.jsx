@@ -1,6 +1,6 @@
 import AuthService from "../services/AuthService";
 
-export const authPageUrls = {
+export const AuthPageUrls = {
   signIn: "/auth/sign-in",
   signUp: "/auth/sign-up",
   sendEmailVerification: "/auth/send-email-verification",
@@ -9,26 +9,26 @@ export const authPageUrls = {
   resetPassword: "/auth/reset-password",
 };
 
-export const userPageUrls = {
+export const UserPageUrls = {
   settings: "/profile/settings",
   userProfile: "/profile/:userId",
+};
+
+export const CommonPageUrls = {
+  home: "/",
 };
 
 export const getOwnProfileUrl = () => {
   const userInfo = AuthService.getUserInfoFromLocalStorage();
   const userId = userInfo?.userId;
   if (userId) {
-    return userPageUrls.userProfile.replace(":userId", userId);
+    return UserPageUrls.userProfile.replace(":userId", userId);
   } else {
     AuthService.clearSessionData();
-    window.location.href = authPageUrls.signIn;
+    window.location.href = AuthPageUrls.signIn;
   }
 };
 
 export const getOtherProfileUrl = (userId) => {
-  return userPageUrls.userProfile.replace(":userId", userId);
-};
-
-export const commonPageUrls = {
-  home: "/",
+  return UserPageUrls.userProfile.replace(":userId", userId);
 };

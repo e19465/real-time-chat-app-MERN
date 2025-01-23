@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { globalErrorHandler } from "../../helpers/responseHandler";
 import ProfilePicture from "../../components/profile/ProfilePicture";
 import { Loader, Mail, User } from "lucide-react";
-import { commonPageUrls } from "../../constants/pageUrls";
+import { CommonPageUrls } from "../../constants/pageUrls";
 import InputContainer from "../../components/auth/InputContainer";
 import { formatDateFromMongoDbDate } from "../../helpers/shared";
 
@@ -34,7 +34,7 @@ const UserProfilePage = () => {
           "Error fetching user profile",
           "Error fetching user profile"
         );
-        navigate(commonPageUrls.home);
+        navigate(CommonPageUrls.home);
       } finally {
         setProfileDataLoading(false);
       }

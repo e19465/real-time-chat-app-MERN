@@ -1,4 +1,4 @@
-export const animationTypes = {
+export const AnimationTypes = {
   ping: "animate-ping",
   bounce: "animate-bounce",
   spin: "animate-spin",
@@ -8,7 +8,7 @@ export const animationTypes = {
   moveRightLeft: "animate-moveRightLeft",
 };
 
-export const localStorageKeys = {
+export const LocalStorageKeys = {
   EMAIL_VER_OTP_SEND_EMAIL: "email_ver_otp_send_email",
   PASSWORD_VER_OTP_SEND_EMAIL: "password_ver_otp_send_email",
 
@@ -18,6 +18,41 @@ export const localStorageKeys = {
   USER_FULL_NAME: "userFullName",
 };
 
-export const backendNeededKeys = {
+export const BackendNeededKeys = {
   DP_FORM_DATA_KEY: "dp",
 };
+
+export const THEMES = [
+  "light",
+  "dark",
+  "cupcake",
+  "bumblebee",
+  "emerald",
+  "corporate",
+  "synthwave",
+  "retro",
+  "cyberpunk",
+  "valentine",
+  "halloween",
+  "garden",
+  "forest",
+  "aqua",
+  "lofi",
+  "pastel",
+  "fantasy",
+  "wireframe",
+  "black",
+  "luxury",
+  "dracula",
+  "cmyk",
+  "autumn",
+  "business",
+  "acid",
+  "lemonade",
+  "night",
+  "coffee",
+  "winter",
+  "dim",
+  "nord",
+  "sunset",
+];

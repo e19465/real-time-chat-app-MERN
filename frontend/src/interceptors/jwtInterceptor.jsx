@@ -1,5 +1,5 @@
 import axios from "axios";
-import { authPageUrls } from "../constants/pageUrls";
+import { AuthPageUrls } from "../constants/pageUrls";
 import { globalErrorHandler } from "../helpers/responseHandler";
 import AuthService from "../services/AuthService";
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
@@ -47,7 +47,7 @@ axiosInstance.interceptors.response.use(
           "Session Expired"
         );
         AuthService.clearSessionData();
-        window.location.href = authPageUrls.signIn;
+        window.location.href = AuthPageUrls.signIn;
         return Promise.reject(refreshError);
       }
     }

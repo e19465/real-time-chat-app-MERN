@@ -8,10 +8,10 @@ import {
   globalSuccessHandler,
 } from "../../helpers/responseHandler";
 import {
-  authPageUrls,
-  commonPageUrls,
+  AuthPageUrls,
+  CommonPageUrls,
   getOwnProfileUrl,
-  userPageUrls,
+  UserPageUrls,
 } from "../../constants/pageUrls";
 import { ProgressLink } from "../nprogress/NProgressHandler";
 
@@ -36,7 +36,7 @@ const Navbar = () => {
       AuthService.clearSessionData();
       setIsModalOpen(false);
       setIsLoading(false);
-      navigate(authPageUrls.signIn);
+      navigate(AuthPageUrls.signIn);
     }
   };
 
@@ -44,7 +44,7 @@ const Navbar = () => {
     <div className="w-full h-full flex items-center justify-between px-12 bg-base-300">
       {/* Left Logo */}
       <div className="font-mono font-semibold tracking-widest relative text-blue-500 text-lg animate-moveRightLeft">
-        <ProgressLink to={commonPageUrls.home}>
+        <ProgressLink to={CommonPageUrls.home}>
           <span className="shine-effect relative">Chatty</span>
         </ProgressLink>
       </div>
@@ -53,7 +53,7 @@ const Navbar = () => {
         <button type="button" onClick={() => setIsModalOpen(true)}>
           <DoorOpen className="size-6" />
         </button>
-        <ProgressLink to={userPageUrls.settings} title="Settings">
+        <ProgressLink to={UserPageUrls.settings} title="Settings">
           <Settings className="size-6" />
         </ProgressLink>
         <ProgressLink to={getOwnProfileUrl()} title="Profile">

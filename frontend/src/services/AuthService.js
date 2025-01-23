@@ -1,5 +1,4 @@
-import { authPageUrls } from "../constants/pageUrls";
-import { localStorageKeys } from "../constants/shared";
+import { LocalStorageKeys } from "../constants/shared";
 import axiosInstance from "../interceptors/jwtInterceptor";
 
 class AuthService {
@@ -120,17 +119,17 @@ class AuthService {
 
   // Get user details from local storage
   getUserInfoFromLocalStorage() {
-    const userId = localStorage.getItem(localStorageKeys.USER_ID);
-    const userEmail = localStorage.getItem(localStorageKeys.USER_EMAIL);
-    const userFullName = localStorage.getItem(localStorageKeys.USER_FULL_NAME);
+    const userId = localStorage.getItem(LocalStorageKeys.USER_ID);
+    const userEmail = localStorage.getItem(LocalStorageKeys.USER_EMAIL);
+    const userFullName = localStorage.getItem(LocalStorageKeys.USER_FULL_NAME);
     return { userId, userEmail, userFullName };
   }
 
   // set user details in local storage
   setUserInfoToLocalStorage(data) {
-    localStorage.setItem(localStorageKeys.USER_ID, data?._id);
-    localStorage.setItem(localStorageKeys.USER_EMAIL, data?.email);
-    localStorage.setItem(localStorageKeys.USER_FULL_NAME, data?.fullName);
+    localStorage.setItem(LocalStorageKeys.USER_ID, data?._id);
+    localStorage.setItem(LocalStorageKeys.USER_EMAIL, data?.email);
+    localStorage.setItem(LocalStorageKeys.USER_FULL_NAME, data?.fullName);
   }
 
   // clear session data, localStorage, sessionStorage, and cookies

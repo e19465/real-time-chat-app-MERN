@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { authPageUrls } from "../constants/pageUrls";
+import { AuthPageUrls } from "../constants/pageUrls";
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = true;
@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate(authPageUrls.signIn, { replace: true });
+      navigate(AuthPageUrls.signIn, { replace: true });
     }
   }, [isAuthenticated, navigate]);
 

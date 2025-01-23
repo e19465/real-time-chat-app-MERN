@@ -5,13 +5,13 @@ import {
   globalErrorHandler,
   globalSuccessHandler,
 } from "../../helpers/responseHandler";
-import { authPageUrls } from "../../constants/pageUrls";
+import { AuthPageUrls } from "../../constants/pageUrls";
 import { useNavigate } from "react-router-dom";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 import { Key, Mail, MessageSquare } from "lucide-react";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
-import { animationTypes, localStorageKeys } from "../../constants/shared";
+import { AnimationTypes, LocalStorageKeys } from "../../constants/shared";
 import AuthForm from "../../components/auth/AuthForm";
 import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
 
@@ -21,7 +21,7 @@ const VerifyEmailPage = () => {
 
   //! State variables
   const [email, setEmail] = useState(
-    localStorage.getItem(localStorageKeys.EMAIL_VER_OTP_SEND_EMAIL) || ""
+    localStorage.getItem(LocalStorageKeys.EMAIL_VER_OTP_SEND_EMAIL) || ""
   );
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,8 +33,8 @@ const VerifyEmailPage = () => {
       setLoading(true);
       const response = await AuthService.verifyEmail(email, otp);
       globalSuccessHandler(response, "Email verified successfully");
-      localStorage.removeItem(localStorageKeys.EMAIL_VER_OTP_SEND_EMAIL);
-      navigate(authPageUrls.signIn);
+      localStorage.removeItem(LocalStorageKeys.EMAIL_VER_OTP_SEND_EMAIL);
+      navigate(AuthPageUrls.signIn);
     } catch (err) {
       globalErrorHandler(
         err,
@@ -102,7 +102,7 @@ const VerifyEmailPage = () => {
         <AuthImagePattern
           title="Verify Your Email"
           subtitle="Get the OTP we sent to your email and verify your email address and verify your email address to complete the registration process."
-          animation={animationTypes.shake}
+          animation={AnimationTypes.shake}
         />
       </div>
     </AuthLayout>

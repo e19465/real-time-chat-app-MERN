@@ -5,14 +5,14 @@ import {
   globalErrorHandler,
   globalSuccessHandler,
 } from "../../helpers/responseHandler";
-import { authPageUrls } from "../../constants/pageUrls";
+import { AuthPageUrls } from "../../constants/pageUrls";
 import { useNavigate } from "react-router-dom";
 import InputContainer from "../../components/auth/InputContainer";
 import { Mail, MessageSquare } from "lucide-react";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 import AuthForm from "../../components/auth/AuthForm";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
-import { animationTypes, localStorageKeys } from "../../constants/shared";
+import { AnimationTypes, LocalStorageKeys } from "../../constants/shared";
 import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
 
 const SendEmailVerificationPage = () => {
@@ -29,8 +29,8 @@ const SendEmailVerificationPage = () => {
         response,
         "Email verification OTP has been successfully sent to your email"
       );
-      localStorage.setItem(localStorageKeys.EMAIL_VER_OTP_SEND_EMAIL, email);
-      navigate(authPageUrls.verifyEmail);
+      localStorage.setItem(LocalStorageKeys.EMAIL_VER_OTP_SEND_EMAIL, email);
+      navigate(AuthPageUrls.verifyEmail);
     } catch (err) {
       globalErrorHandler(
         err,
@@ -89,7 +89,7 @@ const SendEmailVerificationPage = () => {
         <AuthImagePattern
           title="Almost There!"
           subtitle="We just need to verify your email address. Check your inbox for the verification link."
-          animation={animationTypes.bounce}
+          animation={AnimationTypes.bounce}
         />
       </div>
     </AuthLayout>

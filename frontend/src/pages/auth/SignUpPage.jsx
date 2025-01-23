@@ -15,9 +15,9 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-import { authPageUrls } from "../../constants/pageUrls";
+import { AuthPageUrls } from "../../constants/pageUrls";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
-import { animationTypes } from "../../constants/shared";
+import { AnimationTypes } from "../../constants/shared";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthForm from "../../components/auth/AuthForm";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
@@ -54,7 +54,7 @@ const SignUpPage = () => {
       setLoading(true);
       const response = await AuthService.register(formData);
       globalSuccessHandler(response, "Sign up successful");
-      navigate(authPageUrls.verifyEmail);
+      navigate(AuthPageUrls.verifyEmail);
     } catch (err) {
       globalErrorHandler(
         err,
@@ -169,7 +169,7 @@ const SignUpPage = () => {
         <AuthImagePattern
           title="Join our community"
           subtitle="Connect with friends, share moments and stay in touch with your loved ones"
-          animation={animationTypes.pulse}
+          animation={AnimationTypes.pulse}
         />
       </div>
     </AuthLayout>

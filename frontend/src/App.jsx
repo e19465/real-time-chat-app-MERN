@@ -1,9 +1,9 @@
 import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
 import {
-  authPageUrls,
-  commonPageUrls,
-  userPageUrls,
+  AuthPageUrls,
+  CommonPageUrls,
+  UserPageUrls,
 } from "./constants/pageUrls";
 import { PostAuthRestrictRoute, ProtectedRoute } from "./guards";
 import {
@@ -33,7 +33,7 @@ const App = () => {
       <Routes>
         {/******************************* - Common Pages - ******************************************/}
         <Route
-          path={commonPageUrls.home}
+          path={CommonPageUrls.home}
           element={
             <ProtectedRoute>
               <HomePage />
@@ -45,7 +45,7 @@ const App = () => {
         {/********************************* - Auth Pages - ******************************************/}
 
         <Route
-          path={authPageUrls.signIn}
+          path={AuthPageUrls.signIn}
           element={
             <PostAuthRestrictRoute>
               <SignInPage />
@@ -53,7 +53,7 @@ const App = () => {
           }
         />
         <Route
-          path={authPageUrls.signUp}
+          path={AuthPageUrls.signUp}
           element={
             <PostAuthRestrictRoute>
               <SignUpPage />
@@ -61,7 +61,7 @@ const App = () => {
           }
         />
         <Route
-          path={authPageUrls.sendEmailVerification}
+          path={AuthPageUrls.sendEmailVerification}
           element={
             <PostAuthRestrictRoute>
               <SendEmailVerificationPage />
@@ -69,7 +69,7 @@ const App = () => {
           }
         />
         <Route
-          path={authPageUrls.verifyEmail}
+          path={AuthPageUrls.verifyEmail}
           element={
             <PostAuthRestrictRoute>
               <VerifyEmailPage />
@@ -77,7 +77,7 @@ const App = () => {
           }
         />
         <Route
-          path={authPageUrls.sendPasswordResetEmail}
+          path={AuthPageUrls.sendPasswordResetEmail}
           element={
             <PostAuthRestrictRoute>
               <SendPasswordResetEmailPage />
@@ -85,7 +85,7 @@ const App = () => {
           }
         />
         <Route
-          path={authPageUrls.resetPassword}
+          path={AuthPageUrls.resetPassword}
           element={
             <PostAuthRestrictRoute>
               <ResetPasswordPage />
@@ -96,7 +96,7 @@ const App = () => {
         {/************************ - User Account Related Pages - **********************************/}
 
         <Route
-          path={userPageUrls.settings}
+          path={UserPageUrls.settings}
           element={
             <ProtectedRoute>
               <UserSettingsPage />
@@ -104,7 +104,7 @@ const App = () => {
           }
         />
         <Route
-          path={userPageUrls.userProfile}
+          path={UserPageUrls.userProfile}
           element={
             <ProtectedRoute>
               <UserProfilePage />
