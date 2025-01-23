@@ -51,7 +51,7 @@ const ThemeChange = () => {
   return (
     <div className="w-max flex flex-wrap items-center justify-center relative">
       <button ref={buttonRef} onClick={handleShowThemes}>
-        <Palette className="size-6" />
+        <Palette className="size-4 sm:size-6" />
       </button>
 
       {themesVisible && (

@@ -42,7 +42,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-between px-12 bg-base-300">
+    <div className="w-full h-full flex items-center justify-between px-2 sm:px-12 bg-base-300">
       {/* Left Logo */}
       <div className="font-mono font-semibold tracking-widest relative text-lg animate-moveRightLeft">
         <ProgressLink to={CommonPageUrls.home}>
@@ -54,13 +54,13 @@ const Navbar = () => {
       <div className="flex items-center justify-center gap-4" title="Logout">
         <ThemeChange />
         <button type="button" onClick={() => setIsModalOpen(true)}>
-          <DoorOpen className="size-6" />
+          <DoorOpen className="size-4 sm:size-6" />
         </button>
         <ProgressLink to={UserPageUrls.settings} title="Settings">
-          <Settings className="size-6" />
+          <Settings className="size-4 sm:size-6" />
         </ProgressLink>
         <ProgressLink to={getOwnProfileUrl()} title="Profile">
-          <User className="size-6" />
+          <User className="size-4 sm:size-6" />
         </ProgressLink>
       </div>
       {/* Logout Modal */}
