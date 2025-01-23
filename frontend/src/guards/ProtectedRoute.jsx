@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthPageUrls } from "../constants/pageUrls";
+import { useAuthStore } from "../store/useAuthStore";
 
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = true;
+  const { isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
 
   useEffect(() => {

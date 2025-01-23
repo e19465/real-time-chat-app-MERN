@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CommonPageUrls } from "../constants/pageUrls";
+import { useAuthStore } from "../store/useAuthStore";
 
 const PostAuthRestrictRoute = ({ children }) => {
-  const isAuthenticated = false;
+  const { isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
 
   useEffect(() => {
