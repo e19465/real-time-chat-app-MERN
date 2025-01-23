@@ -44,7 +44,10 @@ const Navbar = () => {
   return (
     <div className="w-full h-full flex items-center justify-between px-2 sm:px-12 bg-base-300">
       {/* Left Logo */}
-      <div className="font-mono font-semibold tracking-widest relative text-lg animate-moveRightLeft">
+      <div
+        className="font-mono font-semibold tracking-widest relative text-lg animate-moveRightLeft"
+        title="Home"
+      >
         <ProgressLink to={CommonPageUrls.home}>
           <span className="shine-effect relative">Chatty</span>
         </ProgressLink>

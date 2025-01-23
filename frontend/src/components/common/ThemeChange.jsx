@@ -50,14 +50,14 @@ const ThemeChange = () => {
 
   return (
     <div className="w-max flex flex-wrap items-center justify-center relative">
-      <button ref={buttonRef} onClick={handleShowThemes}>
+      <button ref={buttonRef} onClick={handleShowThemes} title="Change theme">
         <Palette className="size-4 sm:size-6" />
       </button>
 
       {themesVisible && (
         <div
           ref={themeContainerRef}
-          className="absolute top-7 right-7 w-48 bg-base-200 rounded-md shadow-lg py-1 h-[400px] overflow-y-auto flex flex-col gap-1 z-50"
+          className="absolute top-7 right-2 w-48 bg-base-200 rounded-md shadow-lg py-1 h-[400px] overflow-y-auto flex flex-col gap-1 z-50"
         >
           <h2 className="text-sm font-semibold w-full text-center p-2 bg-base-300">
             Select Theme

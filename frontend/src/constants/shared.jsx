@@ -25,6 +25,10 @@ export const BackendNeededKeys = {
   DP_FORM_DATA_KEY: "dp",
 };
 
+export const AppSettings = {
+  DEFAULT_THEME: "coffee",
+};
+
 export const THEMES = [
   "light",
   "dark",
