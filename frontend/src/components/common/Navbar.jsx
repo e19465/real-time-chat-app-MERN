@@ -14,6 +14,7 @@ import {
   UserPageUrls,
 } from "../../constants/pageUrls";
 import { ProgressLink } from "../nprogress/NProgressHandler";
+import ThemeChange from "../profile/ThemeChange";
 
 const Navbar = () => {
   //! Hooks
@@ -49,7 +50,9 @@ const Navbar = () => {
         </ProgressLink>
       </div>
       {/* Right */}
+
       <div className="flex items-center justify-center gap-4" title="Logout">
+        <ThemeChange />
         <button type="button" onClick={() => setIsModalOpen(true)}>
           <DoorOpen className="size-6" />
         </button>

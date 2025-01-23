@@ -16,6 +16,9 @@ export const LocalStorageKeys = {
   USER_ID: "userId",
   USER_EMAIL: "userEmail",
   USER_FULL_NAME: "userFullName",
+
+  // app related
+  SELECTED_THEME: "selected-theme",
 };
 
 export const BackendNeededKeys = {

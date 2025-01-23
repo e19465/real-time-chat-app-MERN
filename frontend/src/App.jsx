@@ -24,10 +24,12 @@ import {
   UserSettingsPage,
 } from "./pages";
 import NProgressDoneComponent from "./components/nprogress/NProgressDoneComponent";
+import { useThemeStore } from "./store/useThemeStore";
 
 const App = () => {
+  const { theme } = useThemeStore();
   return (
-    <div className="w-full min-h-screen h-auto">
+    <div className="w-full min-h-screen h-auto" data-theme={theme}>
       <ToastContainer theme="light" />
       <NProgressDoneComponent />
       <Routes>
