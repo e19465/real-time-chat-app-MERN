@@ -26,7 +26,7 @@ import {
 
 const App = () => {
   return (
-    <div className="w-full h-auto min-h-screen">
+    <div className="w-full min-h-screen h-auto">
       <ToastContainer theme="light" />
 
       <Routes>

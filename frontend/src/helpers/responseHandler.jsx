@@ -5,7 +5,6 @@ export const globalErrorHandler = (
   message = null,
   defaultMessage = null
 ) => {
-  console.log("executing global");
   if (error?.response?.data?.error) {
     toast.error(error.response.data.error);
   } else if (defaultMessage) {

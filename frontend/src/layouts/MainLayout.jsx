@@ -2,11 +2,14 @@ import Navbar from "../components/common/Navbar";
 
 const MainLayout = ({ children }) => {
   return (
-    <div className="w-full h-screen  flex flex-col">
-      <div className="w-full h-[50px]">
+    <div className="w-full h-screen overflow-hidden flex flex-col">
+      {/* Sticky Navbar */}
+      <div className="w-full h-[50px] sticky top-0 z-50">
         <Navbar />
       </div>
-      <div className="w-full min-h-[calc(100%-50px)] h-auto overflow-y-auto flex items-center justify-center">
+
+      {/* Scrollable content */}
+      <div className="w-full flex-1 overflow-auto flex items-center justify-center">
         {children}
       </div>
     </div>

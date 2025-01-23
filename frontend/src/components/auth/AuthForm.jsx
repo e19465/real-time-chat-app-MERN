@@ -1,4 +1,4 @@
-import { Loader } from "lucide-react";
+import LoadingText from "../common/LoadingText";
 
 const AuthForm = ({
   children,
@@ -30,16 +30,11 @@ const AuthForm = ({
           flex items-center justify-center gap-2"
           type="submit"
         >
-          {loading ? (
-            <>
-              <span>{loadingBtnText}</span>
-              <Loader size={16} className="animate-spin" />
-            </>
-          ) : (
-            <>
-              <span>{notLoadingBtnText}</span>
-            </>
-          )}
+          <LoadingText
+            loading={loading}
+            loadingText={loadingBtnText}
+            notLoadingText={notLoadingBtnText}
+          />
         </button>
       </div>
     </form>

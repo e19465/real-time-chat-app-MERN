@@ -17,3 +17,7 @@ export const localStorageKeys = {
   USER_EMAIL: "userEmail",
   USER_FULL_NAME: "userFullName",
 };
+
+export const backendNeededKeys = {
+  DP_FORM_DATA_KEY: "dp",
+};

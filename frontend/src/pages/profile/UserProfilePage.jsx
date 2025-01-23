@@ -5,8 +5,10 @@ import UserService from "../../services/UserService";
 import { useNavigate, useParams } from "react-router-dom";
 import { globalErrorHandler } from "../../helpers/responseHandler";
 import ProfilePicture from "../../components/profile/ProfilePicture";
-import { Loader } from "lucide-react";
+import { Loader, Mail, User } from "lucide-react";
 import { commonPageUrls } from "../../constants/pageUrls";
+import InputContainer from "../../components/auth/InputContainer";
+import { formatDateFromMongoDbDate } from "../../helpers/shared";
 
 const UserProfilePage = () => {
   //! Hooks
@@ -17,7 +19,7 @@ const UserProfilePage = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const isOwnerProfile = AuthService.isLoggedInUser(userId);
-  const [profileTitle, setProfileTitle] = useState("Profile");
+  const [profileTitle, setProfileTitle] = useState("Profile Information");
 
   //! Fetch user profile
   useEffect(() => {
@@ -43,17 +45,17 @@ const UserProfilePage = () => {
   useEffect(() => {
     if (userProfile) {
       if (isOwnerProfile) {
-        setProfileTitle("Your Profile");
+        setProfileTitle("Your Profile Information");
       } else {
         const userName = userProfile?.fullName || "User";
-        setProfileTitle(`${userName}'s Profile`);
+        setProfileTitle(`${userName}'s Profile Information`);
       }
     }
   }, [userProfile]);
 
   return (
     <MainLayout>
-      <div className="w-full md:w-3/4 lg:w-1/2 mx-auto h-[550px] flex flex-col items-center justify-center overflow-y-auto bg-base-300 rounded-lg shadow-lg shadow-gray-800 p-4">
+      <div className="w-full md:w-3/4 lg:w-1/2 xl:w-1/3 mx-auto h-[550px] flex flex-col gap-4 items-center justify-center bg-base-300 rounded-lg shadow-lg shadow-gray-800 p-4">
         {loading ? (
           <div className="w-full h-full flex flex-col gap-2 items-center justify-center">
             <Loader className="size-20 animate-spin" />
@@ -63,22 +65,76 @@ const UserProfilePage = () => {
           <>
             {/* Header */}
             <div className="w-full h-auto flex flex-col items-center justify-center">
-              <h1 className="text-lg capitalize font-semibold">
-                {profileTitle}
-              </h1>
-              <span></span>
+              <h1 className="text-lg capitalize font-semibold">profile</h1>
+              <span>{profileTitle}</span>
             </div>
 
             {/* Profile picture component */}
-            <div>
-              <ProfilePicture isOwnerProfile={isOwnerProfile} />
+            <div className="w-full h-auto flex flex-col items-center justify-center">
+              <ProfilePicture
+                isOwnerProfile={isOwnerProfile}
+                profilePicUrl={userProfile?.profilePic}
+              />
             </div>
 
             {/* Details component */}
-            <div></div>
+            <div className="w-full h-auto flex flex-col gap-2 items-center justify-center">
+              <InputContainer
+                label="Full Name"
+                Icon={User}
+                classNameContainer="gap-1"
+                classNameP="pl-1 text-sm"
+              >
+                <input
+                  type="text"
+                  className="grow placeholder:text-sm"
+                  required
+                  disabled
+                  placeholder="John Doe"
+                  name="full-name-profile"
+                  id="full-name-profile"
+                  value={userProfile?.fullName}
+                />
+              </InputContainer>
+              <InputContainer
+                label="Email"
+                Icon={Mail}
+                classNameContainer="gap-1"
+                classNameP="pl-1 text-sm"
+              >
+                <input
+                  type="email"
+                  className="grow placeholder:text-sm"
+                  name="email-profile"
+                  id="email-profile"
+                  required
+                  disabled
+                  placeholder="jodndoe@gmail.com"
+                  value={userProfile?.email}
+                />
+              </InputContainer>
+            </div>
 
             {/* Footer component */}
-            <div></div>
+            <div className="w-full h-auto flex flex-col items-center justify-between gap-4 bg-base-200 rounded-lg p-6 text-sm">
+              <h1 className="w-full text-base text-left font-semibold text-gray-400">
+                Account Information
+              </h1>
+
+              <div className="w-full h-auto flex flex-col gap-2 items-center justify-between">
+                <div className="w-full h-auto flex items-center justify-between pb-2 border-b border-gray-600">
+                  <span>Member since</span>
+                  <span>
+                    {formatDateFromMongoDbDate(userProfile?.createdAt)}
+                  </span>
+                </div>
+
+                <div className="w-full h-auto flex items-center justify-between">
+                  <span>Status</span>
+                  <span>active</span>
+                </div>
+              </div>
+            </div>
           </>
         )}
       </div>
