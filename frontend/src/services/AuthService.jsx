@@ -1,4 +1,3 @@
-import { LocalStorageKeys } from "../constants/shared";
 import axiosInstance from "../interceptors/jwtInterceptor";
 
 class AuthService {
@@ -114,6 +113,19 @@ class AuthService {
     } catch (err) {
       console.error("Error in changePassword: ", err);
       throw err;
+    }
+  }
+
+  // check logged in user with params id
+  async checkLoggedInUserWithParamsId(userId) {
+    try {
+      const response = await axiosInstance.get(
+        `/auth/check-is-authenticated/${userId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error checking logged in user with params id", error);
+      throw error;
     }
   }
 }

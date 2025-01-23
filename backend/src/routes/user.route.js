@@ -31,13 +31,6 @@ userRouter.put(
   JwtMiddleware.verifyAccessToken,
   UserController.updateProfileInfo
 );
-
-userRouter.get(
-  "/check-access/:userId",
-  JwtMiddleware.verifyTokenAndAccountId,
-  UserController.checkLoggedInUserWithParamsId
-);
-
 /**
  * Complete endpoint examples
  * 1. get profile - GET - http://localhost:5000/api/user/profile

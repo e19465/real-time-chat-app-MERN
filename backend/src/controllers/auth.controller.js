@@ -443,6 +443,20 @@ class AuthController {
       return ErrorHandler.handle500AndCustomError(err, res);
     }
   }
+
+  //! check logged in user with params id
+  async checkLoggedInUserWithParamsId(req, res) {
+    try {
+      return SuccessHandler.handle200(
+        "Params Id matches with Logged in user",
+        null,
+        res
+      );
+    } catch (err) {
+      console.log("Error checking logged in user with params id", err);
+      return ErrorHandler.handle500AndCustomError(err, res);
+    }
+  }
 }
 
 module.exports = new AuthController();

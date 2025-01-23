@@ -48,17 +48,6 @@ class UserService {
       throw error;
     }
   }
-
-  // check logged in user with params id
-  async checkLoggedInUserWithParamsId(userId) {
-    try {
-      const response = await axiosInstance.get(`/user/check-access/${userId}`);
-      return response.data;
-    } catch (error) {
-      console.error("Error checking logged in user with params id", error);
-      throw error;
-    }
-  }
 }
 
 export default new UserService();

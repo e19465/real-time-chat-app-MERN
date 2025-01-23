@@ -8,6 +8,7 @@ import { Loader, Mail, User } from "lucide-react";
 import { CommonPageUrls } from "../../constants/pageUrls";
 import InputContainer from "../../components/auth/InputContainer";
 import { formatDateFromMongoDbDate } from "../../helpers/shared";
+import AuthService from "../../services/AuthService";
 
 const UserProfilePage = () => {
   //! Hooks
@@ -43,9 +44,7 @@ const UserProfilePage = () => {
     const checkLoggedInUserWithParamsId = async () => {
       try {
         setAccessCheckLoading(true);
-        const response = await UserService.checkLoggedInUserWithParamsId(
-          userId
-        );
+        await AuthService.checkLoggedInUserWithParamsId(userId);
         setIsOwnerProfile(true);
       } catch (err) {
         setIsOwnerProfile(false);

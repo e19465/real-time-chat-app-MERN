@@ -44,6 +44,12 @@ authRouter.post(
   AuthController.changePassword
 );
 
+authRouter.get(
+  "/check-is-authenticated/:userId",
+  JwtMiddleware.verifyTokenAndAccountId,
+  AuthController.checkLoggedInUserWithParamsId
+);
+
 /**
  * Complete end points for the auth route
  * 1. Register - POST - http://localhost:5000/api/auth/register
