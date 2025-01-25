@@ -30,7 +30,7 @@ const ChatHeader = ({ user }) => {
 
       {/* Close button */}
       <button
-        className="size-5 flex items-center justify-center hover:bg-primary hover:text-white cursor-pointer border border-primary border-opacity-50"
+        className="size-5 flex items-center justify-center hover:bg-primary cursor-pointer border border-primary border-opacity-25"
         onClick={clearSelectedChatUser}
       >
         <XIcon className="size-4" />
