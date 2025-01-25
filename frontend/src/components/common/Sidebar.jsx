@@ -10,7 +10,10 @@ const Sidebar = () => {
   const [selectOnlyOnline, setSelectOnlyOnline] = useState(false);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [onlineUsers, setOnlineUsers] = useState([]);
+
+  //! Accessing store to get online users and setOnlineUsers action
+  const onlineUsers = useChatStore((state) => state.onlineUsers);
+  const setOnlineUsers = useChatStore((state) => state.setOnlineUsers);
 
   //! access the state and action from the store
   const selectedChatUserId = useChatStore((state) => state.selectedChatUserId);

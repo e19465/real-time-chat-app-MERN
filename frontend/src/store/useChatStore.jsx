@@ -7,6 +7,12 @@ export const useChatStore = create((set, get) => ({
   users: [],
   selectedChatUserId:
     localStorage.getItem(LocalStorageKeys.SELECTED_CHAT_USER_ID) || null,
+  onlineUsers: [],
+
+  // Set online users
+  setOnlineUsers: (users) => {
+    set({ onlineUsers: users });
+  },
 
   // Set selected chat user
   setSelectedChatUserId: (userId) => {
