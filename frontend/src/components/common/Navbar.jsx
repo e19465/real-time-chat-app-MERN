@@ -24,8 +24,8 @@ const Navbar = () => {
 
   //! Accessing store to perform actions
   const clearSessionData = useAuthStore((store) => store.clearSessionData);
-  const clearSelectedChatUserId = useChatStore(
-    (state) => state.clearSelectedChatUserId
+  const clearSelectedChatUser = useChatStore(
+    (state) => state.clearSelectedChatUser
   );
 
   //! State variables
@@ -49,10 +49,6 @@ const Navbar = () => {
     }
   };
 
-  const handleLogoLinkClick = () => {
-    clearSelectedChatUserId();
-  };
-
   return (
     <div className="w-full h-full flex items-center justify-between px-2 sm:px-12 bg-base-300">
       {/* Left Logo */}
@@ -60,7 +56,7 @@ const Navbar = () => {
         className="font-mono font-semibold tracking-widest relative text-lg animate-moveRightLeft"
         title="Home"
       >
-        <ProgressLink to={CommonPageUrls.home} onClick={handleLogoLinkClick}>
+        <ProgressLink to={CommonPageUrls.home} onClick={clearSelectedChatUser}>
           <span className="shine-effect relative">Chatty</span>
         </ProgressLink>
       </div>

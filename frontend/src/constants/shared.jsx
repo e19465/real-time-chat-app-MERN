@@ -19,7 +19,7 @@ export const LocalStorageKeys = {
 
   // app related
   SELECTED_THEME: "selected-theme",
-  SELECTED_CHAT_USER_ID: "selectedChatUserId",
+  SELECTED_CHAT_USER: "selectedChatUser",
 };
 
 export const BackendNeededKeys = {

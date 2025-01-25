@@ -3,25 +3,20 @@ import { useChatStore } from "../../store/useChatStore";
 
 const SidebarChatUser = ({ user }) => {
   //! access the state and action from the store
-  const setSelectedChatUserId = useChatStore(
-    (state) => state.setSelectedChatUserId
+  const setSelectedChatUser = useChatStore(
+    (state) => state.setSelectedChatUser
   );
-  const selectedChatUserId = useChatStore((state) => state.selectedChatUserId);
-
-  //! Handle selected chat user
-  const hadleSelectedChatUser = (userId) => {
-    setSelectedChatUserId(userId);
-  };
+  const selectedChatUser = useChatStore((state) => state.selectedChatUser);
 
   return (
     <button
       className={`w-full h-auto flex items-center justify-start gap-4 overflow-hidden rounded-md py-2 px-4 cursor-pointer ${
-        selectedChatUserId === user._id
+        selectedChatUser?._id === user._id
           ? "bg-primary/70 text-base-300"
           : "bg-base-300"
       }`}
       // to={getChatUrl(user._id)}
-      onClick={() => hadleSelectedChatUser(user._id)}
+      onClick={() => setSelectedChatUser(user)}
     >
       {/* Avatar */}
       <div className="size-16 flex-shrink-0 p-1 border border-primary rounded-full">

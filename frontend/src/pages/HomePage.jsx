@@ -6,13 +6,13 @@ import { useChatStore } from "../store/useChatStore";
 
 const HomePage = () => {
   //! access the state and action from the store
-  const selectedChatUserId = useChatStore((state) => state.selectedChatUserId);
+  const selectedChatUser = useChatStore((state) => state.selectedChatUser);
   return (
     <MainLayout>
       <div className="flex items-center justify-center w-full h-full">
         <Sidebar />
-        {selectedChatUserId ? (
-          <ChatContainer userId={selectedChatUserId} />
+        {selectedChatUser ? (
+          <ChatContainer user={selectedChatUser} />
         ) : (
           <NoChatSelected />
         )}

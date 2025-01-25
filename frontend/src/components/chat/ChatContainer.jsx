@@ -1,21 +1,22 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CommonPageUrls } from "../../constants/pageUrls";
+import ChatHeader from "./ChatHeader";
 
-const ChatContainer = ({ userId }) => {
+const ChatContainer = ({ user }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userId) {
+    if (user) {
       //TODO: Fetch chat messages
     } else {
       navigate(CommonPageUrls.home, { replace: true });
     }
-  }, [userId]);
+  }, [user]);
 
   return (
     <div className="w-full sm:w-[75%] h-full flex-col gap-2 items-center justify-center">
-      <h1>Chat container</h1>
+      <ChatHeader user={user} />
     </div>
   );
 };

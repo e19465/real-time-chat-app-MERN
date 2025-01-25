@@ -4,8 +4,9 @@ import { LocalStorageKeys } from "../constants/shared";
 export const useChatStore = create((set, get) => ({
   messages: [],
   users: [],
-  selectedChatUserId:
-    localStorage.getItem(LocalStorageKeys.SELECTED_CHAT_USER_ID) || null,
+  selectedChatUser: localStorage.getItem(LocalStorageKeys.SELECTED_CHAT_USER)
+    ? JSON.parse(localStorage.getItem(LocalStorageKeys.SELECTED_CHAT_USER))
+    : null,
   onlineUsers: [],
 
   // Set online users
@@ -14,12 +15,15 @@ export const useChatStore = create((set, get) => ({
   },
 
   //TODO: optimize this later
-  setSelectedChatUserId: (userId) => {
-    localStorage.setItem(LocalStorageKeys.SELECTED_CHAT_USER_ID, userId);
-    set({ selectedChatUserId: userId });
+  setSelectedChatUser: (user) => {
+    localStorage.setItem(
+      LocalStorageKeys.SELECTED_CHAT_USER,
+      JSON.stringify(user)
+    );
+    set({ selectedChatUser: user });
   },
-  clearSelectedChatUserId: () => {
-    set({ selectedChatUserId: null });
+  clearSelectedChatUser: () => {
+    set({ selectedChatUser: null });
   },
 
   addMessage: (message) => {

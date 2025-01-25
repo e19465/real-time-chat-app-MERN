@@ -16,7 +16,7 @@ const Sidebar = () => {
   const setOnlineUsers = useChatStore((state) => state.setOnlineUsers);
 
   //! access the state and action from the store
-  const selectedChatUserId = useChatStore((state) => state.selectedChatUserId);
+  const selectedChatUser = useChatStore((state) => state.selectedChatUser);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -37,7 +37,7 @@ const Sidebar = () => {
   return (
     <div
       className={`h-full relative bg-base-200 overflow-y-auto w-full sm:w-[25%] scroll-hover-show  p-2 flex flex-col gap-2 ${
-        selectedChatUserId ? "hidden sm:flex" : "flex"
+        selectedChatUser ? "hidden sm:flex" : "flex"
       }`}
     >
       {loading ? (
