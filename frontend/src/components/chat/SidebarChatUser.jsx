@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useChatStore } from "../../store/useChatStore";
 
 const SidebarChatUser = ({ user }) => {

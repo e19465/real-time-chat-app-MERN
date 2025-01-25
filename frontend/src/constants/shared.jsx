@@ -19,6 +19,9 @@ export const LocalStorageKeys = {
 
   // app related
   SELECTED_THEME: "selected-theme",
+};
+
+export const SessionStorageKeys = {
   SELECTED_CHAT_USER: "selectedChatUser",
 };
 
