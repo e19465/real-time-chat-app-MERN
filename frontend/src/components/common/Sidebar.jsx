@@ -45,7 +45,7 @@ const Sidebar = () => {
       ) : (
         <>
           {/* Header */}
-          <div className="sticky top-0 z-10 p-4 flex flex-col gap-2 w-full h-auto bg-neutral rounded-md shadow-md">
+          <div className="sticky top-0 z-10 p-4 flex flex-col gap-2 w-full h-auto bg-neutral rounded-md shadow-md text-primary">
             <div className="flex items-center justify-start w-full gap-2">
               <Users size={24} />
               <span className="text-sm md:text-lg font-bold capitalize">

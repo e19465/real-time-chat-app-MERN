@@ -24,7 +24,7 @@ const SidebarChatUser = ({ user }) => {
       onClick={() => hadleSelectedChatUser(user._id)}
     >
       {/* Avatar */}
-      <div className="size-16 flex-shrink-0 p-1 border border-base-300 rounded-full">
+      <div className="size-16 flex-shrink-0 p-1 border border-primary rounded-full">
         <img
           src={user?.profilePic ? user.profilePic : "/noavatar.webp"}
           className="w-full h-full rounded-full object-cover"
