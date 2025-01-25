@@ -24,7 +24,9 @@ const Modal = ({
               <span className="text-white bg-blue-500/10 w-12 h-12 rounded-full flex items-center justify-center p-2">
                 <Icon className="size-6" />
               </span>
-              <h2 className="font-bold text-lg mt-2">{dialogQuestion}</h2>
+              <h2 className="font-bold text-lg mt-2 text-gray-300">
+                {dialogQuestion}
+              </h2>
               {dialogText && <p className="mt-2 text-center">{dialogText}</p>}
               <div className="flex items-center justify-center gap-3 w-full mt-6">
                 <button
@@ -39,7 +41,7 @@ const Modal = ({
                 <button
                   disabled={isLoading}
                   onClick={handleAccept}
-                  className={`bg-base-100 border border-gray-400 px-6 py-2.5 text-sm rounded shadow-sm hover:bg-base-300 transition-colors duration-300 ${
+                  className={`bg-black text-white border border-gray-400 px-6 py-2.5 text-sm rounded shadow-sm hover:bg-white hover:text-black transition-colors duration-300 ${
                     isLoading && "cursor-not-allowed"
                   }`}
                 >

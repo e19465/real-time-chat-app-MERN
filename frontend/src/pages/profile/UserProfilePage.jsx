@@ -133,7 +133,7 @@ const UserProfilePage = () => {
 
               {/* Footer component */}
               <div className="w-full h-auto flex flex-col items-center justify-between gap-4 bg-base-200 rounded-lg p-6 text-sm">
-                <h1 className="w-full text-base text-left font-semibold text-gray-400">
+                <h1 className="w-full text-base text-left font-semibold">
                   Account Information
                 </h1>
 
