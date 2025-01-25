@@ -28,7 +28,7 @@ const SidebarChatUser = ({ user }) => {
 
       {/* Full Name */}
       <div className="flex flex-col items-start justify-center flex-grow overflow-hidden">
-        <h1 className="text-sm font-bold truncate max-w-[150px] md:max-w-full">
+        <h1 className="text-sm font-bold truncate max-w-[250px] md:max-w-full">
           {user?.fullName}
         </h1>
       </div>
