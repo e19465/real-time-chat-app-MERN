@@ -24,8 +24,8 @@ const Navbar = () => {
 
   //! Accessing store to perform actions
   const clearSessionData = useAuthStore((store) => store.clearSessionData);
-  const setSelectedChatUserId = useChatStore(
-    (state) => state.setSelectedChatUserId
+  const clearSelectedChatUserId = useChatStore(
+    (state) => state.clearSelectedChatUserId
   );
 
   //! State variables
@@ -50,7 +50,7 @@ const Navbar = () => {
   };
 
   const handleLogoLinkClick = () => {
-    setSelectedChatUserId(null);
+    clearSelectedChatUserId();
   };
 
   return (
