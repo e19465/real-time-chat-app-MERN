@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "./Modal";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthService from "../../services/AuthService";
 import { LogOut, DoorOpen, User, Settings } from "lucide-react";
 import {
@@ -20,7 +20,7 @@ import { useAuthStore } from "../../store/useAuthStore";
 const Navbar = () => {
   //! Hooks
   const navigate = useNavigate();
-  const { clearSessionData } = useAuthStore();
+  const clearSessionData = useAuthStore((store) => store.clearSessionData);
 
   //! State variables
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,11 +33,11 @@ const Navbar = () => {
       setIsLoading(true);
       const response = await AuthService.logout();
       globalSuccessHandler(response, "Logout successful");
+      setIsModalOpen(false);
+      clearSessionData();
     } catch (error) {
       globalErrorHandler(error);
     } finally {
-      clearSessionData();
-      setIsModalOpen(false);
       setIsLoading(false);
       navigate(AuthPageUrls.signIn);
     }

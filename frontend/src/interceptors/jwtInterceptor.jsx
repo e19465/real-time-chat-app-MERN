@@ -1,8 +1,6 @@
 import axios from "axios";
 import { AuthPageUrls } from "../constants/pageUrls";
 import { globalErrorHandler } from "../helpers/responseHandler";
-import AuthService from "../services/AuthService";
-import { useAuthStore } from "../store/useAuthStore";
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const axiosInstance = axios.create({
@@ -30,7 +28,7 @@ axiosInstance.interceptors.response.use(
       (error.response?.status === 401 || error.response?.status === 403) &&
       !originalRequest._retry
     ) {
-      console.log("Refreshing token...");
+      // console.log("Refreshing token...");
       originalRequest._retry = true; // Mark the request as retried to avoid infinite loops.
       try {
         // Make a request to your auth server to refresh the token using cookies.
@@ -47,8 +45,7 @@ axiosInstance.interceptors.response.use(
           "Token refresh failed",
           "Session Expired"
         );
-        const { clearSessionData } = useAuthStore();
-        clearSessionData();
+        localStorage.clear();
         window.location.href = AuthPageUrls.signIn;
         return Promise.reject(refreshError);
       }

@@ -18,7 +18,9 @@ import { useAuthStore } from "../../store/useAuthStore";
 const SignInPage = () => {
   //! Hooks
   const navigate = useNavigate();
-  const { setUserInfoToLocalStorage } = useAuthStore();
+  const setUserInfoToLocalStorage = useAuthStore(
+    (store) => store.setUserInfoToLocalStorage
+  );
 
   //! State variables
   const [formData, setFormData] = useState({

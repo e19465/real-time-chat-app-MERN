@@ -35,15 +35,8 @@ export const useAuthStore = create((set, get) => ({
 
   // Clear session data
   clearSessionData: () => {
-    localStorage.removeItem(LocalStorageKeys.USER_ID);
-    localStorage.removeItem(LocalStorageKeys.USER_EMAIL);
-    localStorage.removeItem(LocalStorageKeys.USER_FULL_NAME);
+    localStorage.clear();
     sessionStorage.clear();
-    document.cookie.split(";").forEach((c) => {
-      document.cookie = c
-        .replace(/^ +/, "")
-        .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
-    });
     set({ userId: null, userEmail: null, userFullName: null });
   },
 }));
