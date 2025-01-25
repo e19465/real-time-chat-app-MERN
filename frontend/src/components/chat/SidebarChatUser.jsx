@@ -1,16 +1,27 @@
-import { useParams } from "react-router-dom";
-import { ProgressLink } from "../nprogress/NProgressHandler";
-import { getChatUrl } from "../../constants/pageUrls";
+import { useState } from "react";
+import { useChatStore } from "../../store/useChatStore";
 
 const SidebarChatUser = ({ user }) => {
-  const { userId } = useParams();
+  //! access the state and action from the store
+  const setSelectedChatUserId = useChatStore(
+    (state) => state.setSelectedChatUserId
+  );
+  const selectedChatUserId = useChatStore((state) => state.selectedChatUserId);
+
+  //! Handle selected chat user
+  const hadleSelectedChatUser = (userId) => {
+    setSelectedChatUserId(userId);
+  };
 
   return (
-    <ProgressLink
+    <button
       className={`w-full h-auto flex items-center justify-start gap-4 overflow-hidden rounded-md py-2 px-4 cursor-pointer ${
-        userId === user._id ? "bg-primary/70 text-base-300" : "bg-base-300"
+        selectedChatUserId === user._id
+          ? "bg-primary/70 text-base-300"
+          : "bg-base-300"
       }`}
-      to={getChatUrl(user._id)}
+      // to={getChatUrl(user._id)}
+      onClick={() => hadleSelectedChatUser(user._id)}
     >
       {/* Avatar */}
       <div className="size-16 flex-shrink-0 p-1 border border-base-300 rounded-full">
@@ -26,7 +37,7 @@ const SidebarChatUser = ({ user }) => {
           {user?.fullName}
         </h1>
       </div>
-    </ProgressLink>
+    </button>
   );
 };
 

@@ -25,7 +25,6 @@ import {
 } from "./pages";
 import NProgressDoneComponent from "./components/nprogress/NProgressDoneComponent";
 import { useThemeStore } from "./store/useThemeStore";
-import ChatPage from "./pages/chat/ChatPage";
 
 const App = () => {
   const { theme } = useThemeStore();
@@ -111,16 +110,6 @@ const App = () => {
           element={
             <ProtectedRoute>
               <UserProfilePage />
-            </ProtectedRoute>
-          }
-        />
-
-        {/************************ - Chat Related Pages - **********************************/}
-        <Route
-          path={CommonPageUrls.singleChat}
-          element={
-            <ProtectedRoute>
-              <ChatPage />
             </ProtectedRoute>
           }
         />

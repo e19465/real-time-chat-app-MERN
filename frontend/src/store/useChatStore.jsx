@@ -1,9 +1,18 @@
 import { create } from "zustand";
+import { LocalStorageKeys } from "../constants/shared";
 
 export const useChatStore = create((set, get) => ({
   messages: [],
   selectedUser: null,
   users: [],
+  selectedChatUserId:
+    localStorage.getItem(LocalStorageKeys.SELECTED_CHAT_USER_ID) || null,
+
+  // Set selected chat user
+  setSelectedChatUserId: (userId) => {
+    localStorage.setItem(LocalStorageKeys.SELECTED_CHAT_USER_ID, userId);
+    set({ selectedChatUserId: userId });
+  },
 
   addMessage: (message) => {
     set((state) => ({ messages: [...state.messages, message] }));

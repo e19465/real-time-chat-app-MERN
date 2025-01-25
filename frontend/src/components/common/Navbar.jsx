@@ -16,11 +16,17 @@ import {
 import { ProgressLink } from "../nprogress/NProgressHandler";
 import ThemeChange from "./ThemeChange";
 import { useAuthStore } from "../../store/useAuthStore";
+import { useChatStore } from "../../store/useChatStore";
 
 const Navbar = () => {
   //! Hooks
   const navigate = useNavigate();
+
+  //! Accessing store to perform actions
   const clearSessionData = useAuthStore((store) => store.clearSessionData);
+  const setSelectedChatUserId = useChatStore(
+    (state) => state.setSelectedChatUserId
+  );
 
   //! State variables
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,6 +49,10 @@ const Navbar = () => {
     }
   };
 
+  const handleLogoLinkClick = () => {
+    setSelectedChatUserId(null);
+  };
+
   return (
     <div className="w-full h-full flex items-center justify-between px-2 sm:px-12 bg-base-300">
       {/* Left Logo */}
@@ -50,7 +60,7 @@ const Navbar = () => {
         className="font-mono font-semibold tracking-widest relative text-lg animate-moveRightLeft"
         title="Home"
       >
-        <ProgressLink to={CommonPageUrls.home}>
+        <ProgressLink to={CommonPageUrls.home} onClick={handleLogoLinkClick}>
           <span className="shine-effect relative">Chatty</span>
         </ProgressLink>
       </div>

@@ -1,18 +1,19 @@
 import { Loader, Users } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import UserService from "../../services/UserService";
 import { globalErrorHandler } from "../../helpers/responseHandler";
-import { getChatUrl } from "../../constants/pageUrls";
-import { ProgressLink } from "../nprogress/NProgressHandler";
 import SidebarChatUser from "../chat/SidebarChatUser";
+import { useChatStore } from "../../store/useChatStore";
 
 const Sidebar = () => {
-  const { userId } = useParams();
+  //! State
   const [selectOnlyOnline, setSelectOnlyOnline] = useState(false);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [onlineUsers, setOnlineUsers] = useState([]);
+
+  //! access the state and action from the store
+  const selectedChatUserId = useChatStore((state) => state.selectedChatUserId);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -33,7 +34,7 @@ const Sidebar = () => {
   return (
     <div
       className={`h-full relative bg-base-200 overflow-y-auto w-full sm:w-[25%] scroll-hover-show  p-2 flex flex-col gap-2 ${
-        userId ? "hidden sm:flex" : "flex"
+        selectedChatUserId ? "hidden sm:flex" : "flex"
       }`}
     >
       {loading ? (
