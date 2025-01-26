@@ -4,12 +4,13 @@ import UserService from "../../services/UserService";
 import { globalErrorHandler } from "../../helpers/responseHandler";
 import SidebarChatUser from "../chat/SidebarChatUser";
 import { useChatStore } from "../../store/useChatStore";
+import SidebarSkeleton from "../skeletons/SidebarSkeleton";
 
 const Sidebar = () => {
   //! State
   const [selectOnlyOnline, setSelectOnlyOnline] = useState(false);
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   //! Accessing store to get online users and setOnlineUsers action
   const onlineUsers = useChatStore((state) => state.onlineUsers);
@@ -41,10 +42,11 @@ const Sidebar = () => {
       }`}
     >
       {loading ? (
-        <div className="w-full h-full flex flex-col items-center justify-center">
-          <Loader className="animate-spin size-8" />
-          <span className="text-sm">Loading users...</span>
-        </div>
+        // <div className="w-full h-full flex flex-col items-center justify-center">
+        //   <Loader className="animate-spin size-8" />
+        //   <span className="text-sm">Loading users...</span>
+        // </div>
+        <SidebarSkeleton />
       ) : (
         <>
           {/* Header */}

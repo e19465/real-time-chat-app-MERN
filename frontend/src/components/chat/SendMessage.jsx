@@ -1,10 +1,20 @@
-import { Paperclip, SendIcon, XCircle } from "lucide-react";
+import { Loader2Icon, Paperclip, SendIcon, XCircle } from "lucide-react";
 import { useState } from "react";
-import { toast } from "react-toastify";
+import { useChatStore } from "../../store/useChatStore";
+import { useAuthStore } from "../../store/useAuthStore";
+import MessageService from "../../services/MessageService";
+import { globalErrorHandler } from "../../helpers/responseHandler";
 
 const SendMessage = ({ user }) => {
+  //! State
   const [message, setMessage] = useState("");
   const [files, setFiles] = useState([]);
+  const [sending, setSending] = useState(false);
+
+  //! Access store to perform actions
+  const userId = useAuthStore((store) => store.userId);
+  const addMessage = useChatStore((store) => store.addMessage);
+  const clearMessageById = useChatStore((store) => store.clearMessageById);
 
   //! Handle file selection
   const handleFileChange = (e) => {
@@ -19,10 +29,43 @@ const SendMessage = ({ user }) => {
   };
 
   //! Handle sending message
-  const handleSendMessage = (e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault();
-    toast.success(`${files.length} files selected`);
-    setMessage("");
+    const trimmedMessage = message.trim();
+    const temporyFileUrls = files.map((file) => URL.createObjectURL(file));
+    const tempMessageId = `temp-${Date.now()}`;
+    if (trimmedMessage || files.length > 0) {
+      const newMessage = {
+        _id: tempMessageId,
+        senderId: userId,
+        receiverId: user._id,
+        text: trimmedMessage,
+        files: temporyFileUrls,
+        createdAt: new Date(),
+        temporary: true,
+      };
+      addMessage(newMessage);
+      setFiles([]);
+    }
+
+    try {
+      setSending(true);
+      let formData = new FormData();
+      formData.append("text", message);
+      files.forEach((file) => {
+        formData.append("files", file);
+      });
+      const response = await MessageService.createMessage(user._id, formData);
+      console.log("sended");
+      clearMessageById(tempMessageId);
+      addMessage(response.data);
+    } catch (err) {
+      clearMessageById(tempMessageId);
+      globalErrorHandler(err, "Error sending message", "Error sending message");
+    } finally {
+      setSending(false);
+      setMessage("");
+    }
   };
 
   return (
@@ -75,8 +118,17 @@ const SendMessage = ({ user }) => {
             multiple
             onChange={handleFileChange}
           />
-          <button className="" title="Send message" type="submit">
-            <SendIcon className="size-4 sm:size-6" />
+          <button
+            className=""
+            title="Send message"
+            type="submit"
+            disabled={sending}
+          >
+            {sending ? (
+              <Loader2Icon className="animate-spin size-4 sm:size-6" />
+            ) : (
+              <SendIcon className="size-4 sm:size-6" />
+            )}
           </button>
         </div>
       </div>

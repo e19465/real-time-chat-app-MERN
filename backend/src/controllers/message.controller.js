@@ -36,7 +36,7 @@ class MessageController {
         senderId: myUserId,
         receiverId: userToChatUserId,
         text: text,
-        images: fileUrls,
+        files: fileUrls,
       });
 
       // save the message to the database

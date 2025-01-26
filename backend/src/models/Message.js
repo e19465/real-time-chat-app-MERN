@@ -17,7 +17,7 @@ const messageSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    images: {
+    files: {
       type: [String],
       default: [],
     },
