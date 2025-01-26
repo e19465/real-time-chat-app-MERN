@@ -33,10 +33,10 @@ class MessageService {
 
   // delete messages
   async deleteMessages(userToChatUserId, messageIds) {
+    const messageIdsString = JSON.stringify(messageIds);
     try {
       const response = await axiosInstance.delete(
-        `/message/${userToChatUserId}`,
-        { messageIds }
+        `/message/${userToChatUserId}/${messageIdsString}`
       );
       return response.data;
     } catch (error) {

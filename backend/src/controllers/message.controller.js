@@ -94,6 +94,8 @@ class MessageController {
       // obtain the current user id and the user to chat user id from the request, check if they exist
       const myUserId = req.user.userId;
       const userToChatUserId = req.params.userToChatUserId;
+      const messageIds = JSON.parse(req.params.messageIds);
+
       if (!myUserId) {
         return ErrorHandler.handle400("Current user id is required", res);
       }
@@ -101,7 +103,6 @@ class MessageController {
         return ErrorHandler.handle400("User to chat user id is required", res);
       }
 
-      const { messageIds } = req.body;
       // check messageIds are array or not, if array then lenght should be greater than 0
       if (
         !messageIds ||

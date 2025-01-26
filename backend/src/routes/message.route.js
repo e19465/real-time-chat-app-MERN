@@ -20,7 +20,7 @@ messageRouter.post(
 
 // delete messages
 messageRouter.delete(
-  "/:userToChatUserId",
+  "/:userToChatUserId/:messageIds",
   JwtMiddleware.verifyAccessToken,
   MessageController.deleteMessages
 );

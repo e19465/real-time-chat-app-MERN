@@ -1,4 +1,4 @@
-import { ArrowDownIcon } from "lucide-react";
+import { ArrowDownIcon, MessageCircle, Trash2Icon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import MessageService from "../../services/MessageService";
 import { globalErrorHandler } from "../../helpers/responseHandler";
@@ -8,6 +8,7 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { checkUrlIsImage, getFileType } from "../../helpers/shared";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
 import { useChatStore } from "../../store/useChatStore";
+import Modal from "../common/Modal";
 
 const Chat = ({ user }) => {
   //! Hooks
@@ -18,10 +19,14 @@ const Chat = ({ user }) => {
   const loggedInUserId = useAuthStore((store) => store.userId);
   const messages = useChatStore((store) => store.messages);
   const setMessages = useChatStore((store) => store.setMessages);
+  const clearMessageById = useChatStore((store) => store.clearMessageById);
 
   //! State
   const [showScrollButton, setShowScrollButton] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [messageToDeleteId, setMessageToDeleteId] = useState(null);
 
   //! Detect when user scrolls away from the bottom
   const handleScroll = () => {
@@ -73,7 +78,7 @@ const Chat = ({ user }) => {
           globalErrorHandler(
             err,
             "Error fetching messages",
-            "Error fetching messages"
+            "Something went wrong, please try again later"
           );
         } finally {
           setLoading(false);
@@ -84,6 +89,28 @@ const Chat = ({ user }) => {
       navigate(CommonPageUrls.home, { replace: true });
     }
   }, [user]);
+
+  //! Method to delete a message
+  const handleDeleteMessage = async () => {
+    try {
+      console.log("Deleting message with id: ", messageToDeleteId);
+      setDeleting(true);
+      const response = await MessageService.deleteMessages(user._id, [
+        messageToDeleteId,
+      ]);
+      console.log("Deleted message: ", response);
+      clearMessageById(messageToDeleteId);
+    } catch (err) {
+      globalErrorHandler(
+        err,
+        "Error deleting message",
+        "Something went wrong, please try again later"
+      );
+    } finally {
+      setDeleting(false);
+      setModalOpen(false);
+    }
+  };
 
   return (
     <div
@@ -98,7 +125,7 @@ const Chat = ({ user }) => {
             messages?.map((message) => (
               <div
                 key={message._id}
-                className={`w-full p-2 flex ${
+                className={`w-full p-2 flex relative ${
                   message.senderId === loggedInUserId
                     ? "justify-end"
                     : "justify-start"
@@ -135,12 +162,27 @@ const Chat = ({ user }) => {
                   <span className="block text-xs mt-2">
                     {new Date(message.createdAt).toLocaleTimeString()}
                   </span>
+
+                  {message.senderId === loggedInUserId && (
+                    <button
+                      className="absolute bottom-2 right-2 p-1"
+                      title="Delete"
+                      onClick={() => {
+                        setMessageToDeleteId(message._id);
+                        setModalOpen(true);
+                      }}
+                    >
+                      <Trash2Icon className="size-4" />
+                    </button>
+                  )}
                 </div>
               </div>
             ))
           ) : (
-            <div className="h-[1700px] w-full flex items-center justify-center text-gray-400">
-              No messages yet
+            <div className="h-full w-full flex flex-col gap-1 text-sm items-center justify-center text-primary animate-pulse">
+              <MessageCircle className="size-8" />
+              <span className="font-semibold">No messages yet</span>
+              <span>Say hi to start a chat</span>
             </div>
           )}
         </>
@@ -155,6 +197,20 @@ const Chat = ({ user }) => {
         >
           <ArrowDownIcon className="size-4" />
         </button>
+      )}
+
+      {modalOpen && (
+        <Modal
+          dialogQuestion={"Delete message?"}
+          dialogText={"This action cannot be undone"}
+          Icon={Trash2Icon}
+          isModelOpen={modalOpen}
+          handleClose={() => setModalOpen(false)}
+          isLoading={deleting}
+          handleAccept={handleDeleteMessage}
+          loadingText={"Deleting..."}
+          notLoadingText={"Delete"}
+        />
       )}
     </div>
   );
