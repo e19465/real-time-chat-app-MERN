@@ -17,7 +17,7 @@ A real-time chat application built using the MERN stack. This app allows users t
 - **Best Practices**: The app follows best practices in both frontend and backend development for maintainability and scalability.
 - **Cookie-Based Authentication**:  
   The application uses **cookie-based authentication** to securely store JWT tokens in **HttpOnly cookies**, preventing access via JavaScript and reducing the risk of **Cross-Site Scripting (XSS)** and **Cross-Site Request Forgery (CSRF)** attacks. This ensures seamless login while protecting sensitive information.
-- **Zoostand**: State Management Tool in Frontend
+- **Zustand**: State Management Tool in Frontend
 
 ---
 
@@ -28,16 +28,24 @@ A real-time chat application built using the MERN stack. This app allows users t
   - React
   - Vite (for fast build and hot-reload)
   - Tailwind CSS (for custom styling)
-  - DaisyUI (for pre-built UI components)
+  - DaisyUI (for pre-built UI components | themes)
   - Axios (for API requests)
   - Axios Interceptors (for automating token refresh process)
+  - Zustand (state management)
+  - Services for BE requests (for clear separation)
+  - Socket.io-client - (Dealing with real-time updates)
+  - Best practices
 
 - **Backend**:
   - Node.js
   - Express.js
   - MongoDB (NoSQL database)
+  - Cloudinary (For file uploads)
   - Socket.IO (for real-time communication)
+  - Cookie based authentication through Http-Only cookies
+  - Email verification functionality with OTP
   - JWT Authentication (for secure token-based user authentication)
+  - Best practices
 
 ---
 
@@ -47,7 +55,7 @@ A real-time chat application built using the MERN stack. This app allows users t
 
 Before getting started, ensure that you have the following installed:
 
-- [Node.js](https://nodejs.org/) (v12 or higher)
+- [Node.js](https://nodejs.org/) (LTS)
 - [MongoDB](https://www.mongodb.com/try/download/community) (or use a cloud instance like [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
 - [Git](https://git-scm.com/)
 
