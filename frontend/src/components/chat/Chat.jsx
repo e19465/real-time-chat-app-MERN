@@ -37,8 +37,10 @@ const Chat = ({ user }) => {
   //! Scroll to bottom when the component renders or the button is clicked
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
+      setTimeout(() => {
+        chatContainerRef.current.scrollTop =
+          chatContainerRef.current.scrollHeight;
+      }, 50);
     }
   };
 
@@ -57,7 +59,7 @@ const Chat = ({ user }) => {
       // Clean up the event listener when the component unmounts
       container.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [messages]);
 
   //! Fetch messages when the user changes
   useEffect(() => {
@@ -85,7 +87,7 @@ const Chat = ({ user }) => {
 
   return (
     <div
-      className="flex-1 h-auto overflow-y-auto w-full relative scroll-smooth"
+      className="flex-1 h-auto overflow-y-auto w-full relative scroll-smooth z-10"
       ref={chatContainerRef}
     >
       {loading ? (
@@ -147,7 +149,7 @@ const Chat = ({ user }) => {
       {/* Scroll to bottom button */}
       {showScrollButton && (
         <button
-          className="sticky bottom-4 left-[95%] p-3 rounded-full shadow-lg"
+          className="sticky bottom-4 left-[95%] p-3 rounded-full shadow-lg z-50"
           title="Scroll to bottom"
           onClick={scrollToBottom}
         >
