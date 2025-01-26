@@ -1,10 +1,13 @@
 import { create } from "zustand";
 import { LocalStorageKeys } from "../constants/shared";
+import { useSocketStore } from "./useSocketStore";
 
 export const useAuthStore = create((set, get) => ({
   userId: localStorage.getItem(LocalStorageKeys.USER_ID),
   userEmail: localStorage.getItem(LocalStorageKeys.USER_EMAIL),
   userFullName: localStorage.getItem(LocalStorageKeys.USER_FULL_NAME),
+  socket: null,
+  onlineUsers: [],
 
   // Get user details from local storage
   getUserInfoFromLocalStorage: () => {
@@ -25,6 +28,7 @@ export const useAuthStore = create((set, get) => ({
       userEmail: data?.email,
       userFullName: data?.fullName,
     });
+    useSocketStore.getState().connectToSocket();
   },
 
   // Check if user is authenticated
@@ -38,5 +42,6 @@ export const useAuthStore = create((set, get) => ({
     localStorage.clear();
     sessionStorage.clear();
     set({ userId: null, userEmail: null, userFullName: null });
+    useSocketStore.getState().disconnectFromSocket();
   },
 }));

@@ -1,4 +1,5 @@
 import { useChatStore } from "../../store/useChatStore";
+import { useSocketStore } from "../../store/useSocketStore";
 
 const SidebarChatUser = ({ user }) => {
   //! access the state and action from the store
@@ -6,6 +7,7 @@ const SidebarChatUser = ({ user }) => {
     (state) => state.setSelectedChatUser
   );
   const selectedChatUser = useChatStore((state) => state.selectedChatUser);
+  const onlineUsers = useSocketStore((store) => store.onlineUsers);
 
   return (
     <button
@@ -18,11 +20,16 @@ const SidebarChatUser = ({ user }) => {
       onClick={() => setSelectedChatUser(user)}
     >
       {/* Avatar */}
-      <div className="size-16 flex-shrink-0 p-1 border border-primary rounded-full">
+      <div className="size-16 flex-shrink-0 p-1 border border-primary rounded-full relative">
         <img
           src={user?.profilePic ? user.profilePic : "/noavatar.webp"}
           className="w-full h-full rounded-full object-cover"
         />
+        <span
+          className={`size-3 rounded-full bg-green-500 absolute bottom-2 right-0 ${
+            onlineUsers.includes(user._id) ? "block" : "hidden"
+          }`}
+        ></span>
       </div>
 
       {/* Full Name */}

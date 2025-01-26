@@ -33,6 +33,10 @@ export const AppSettings = {
   DEFAULT_THEME: "coffee",
 };
 
+export const SocketKeys = {
+  GET_ONLINE_USERS: "getOnlineUsers",
+};
+
 export const THEMES = [
   "light",
   "dark",

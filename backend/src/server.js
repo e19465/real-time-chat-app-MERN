@@ -7,9 +7,9 @@ const corsOptions = require("./config/corsOptions");
 const cookieParser = require("cookie-parser");
 const serveRoutes = require("./routes");
 const connectToMongoDB = require("./db");
+const { app, io, server } = require("./config/socket");
 
-// configurations
-const app = express();
+//! configurations
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 
@@ -36,6 +36,6 @@ connectToMongoDB(app).then(() => {
 });
 
 //! app listening to port
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Chat MERN server is running on port ${PORT}`);
 });

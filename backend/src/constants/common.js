@@ -1,15 +1,31 @@
-const otpSendEmailTypes = {
-  email: "email",
-  password: "password",
+const OtpSendEmailTypes = {
+  EMAIL: "email",
+  PASSWORD: "password",
 };
 
-const mongoDbErrorCodes = {
-  duplicateKey: 11000,
+const MongoDbErrorCodes = {
+  DUPLICATE_KEY: 11000,
+};
+
+const SocketKeys = {
+  GET_ONLINE_USERS: "getOnlineUsers",
 };
 
 const ModalNames = {
-  User: "User",
-  Message: "Message",
+  USER: "User",
+  MESSAGE: "Message",
 };
 
-module.exports = { otpSendEmailTypes, mongoDbErrorCodes, ModalNames };
+const SocketRelatedMethods = {
+  CONNECTION: "connection",
+  CONNECT: "connect",
+  DISCONNECT: "disconnect",
+};
+
+module.exports = {
+  OtpSendEmailTypes,
+  MongoDbErrorCodes,
+  SocketKeys,
+  ModalNames,
+  SocketRelatedMethods,
+};

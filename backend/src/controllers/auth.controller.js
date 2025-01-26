@@ -3,7 +3,7 @@ const PasswordHashCompare = require("../helpers/PasswordHashCompare");
 const { passwordStrengthChecker, normalizeEmail } = require("../helpers/Utils");
 const User = require("../models/User");
 const sendEmail = require("../services/EmailService");
-const { mongoDbErrorCodes, otpSendEmailTypes } = require("../constants/common");
+const { MongoDbErrorCodes, OtpSendEmailTypes } = require("../constants/common");
 const EmailOtpHandler = require("../helpers/EmailOtpHandler");
 const emailVerifyEmailTemplate = require("../emailTemplates/emailVerifyEmailTemplate");
 const passwordResetEmailTemplate = require("../emailTemplates/passwordResetEmailTemplate");
@@ -121,7 +121,7 @@ class AuthController {
       // Save OTP in Db and get the OTP
       const sixDigitOtp = await EmailOtpHandler.sendOtp(
         email,
-        otpSendEmailTypes.email
+        OtpSendEmailTypes.EMAIL
       );
 
       // Send email verification email with OTP
@@ -139,7 +139,7 @@ class AuthController {
       );
     } catch (err) {
       console.log("Error registering user", err);
-      if (err.code === mongoDbErrorCodes.duplicateKey) {
+      if (err.code === MongoDbErrorCodes.DUPLICATE_KEY) {
         return ErrorHandler.handle400("Email already exists", res);
       }
       return ErrorHandler.handle500AndCustomError(err, res);
@@ -170,7 +170,7 @@ class AuthController {
       // Save OTP in Db and get the OTP
       const sixDigitOtp = await EmailOtpHandler.sendOtp(
         email,
-        otpSendEmailTypes.email
+        OtpSendEmailTypes.EMAIL
       );
 
       // Send email verification email with OTP
@@ -214,7 +214,7 @@ class AuthController {
       }
 
       // Verify OTP, if not valid return 400, finally return 200
-      await EmailOtpHandler.verifyOtp(email, otp, otpSendEmailTypes.email);
+      await EmailOtpHandler.verifyOtp(email, otp, OtpSendEmailTypes.EMAIL);
       return SuccessHandler.handle200(
         "Email verified successfully, You may sign in now",
         null,
@@ -245,7 +245,7 @@ class AuthController {
       // Save user otp in db
       const sixDigitOtp = await EmailOtpHandler.sendOtp(
         email,
-        otpSendEmailTypes.password
+        OtpSendEmailTypes.EMAIL
       );
 
       // Send password reset email with otp
@@ -304,7 +304,7 @@ class AuthController {
       }
 
       // Verify OTP, if not valid return 400
-      await EmailOtpHandler.verifyOtp(email, otp, otpSendEmailTypes.password);
+      await EmailOtpHandler.verifyOtp(email, otp, OtpSendEmailTypes.PASSWORD);
 
       // If all checks passed, Hash password and save it to db and return 200
       const hashedPassword = await PasswordHashCompare.hashPassword(password);

@@ -5,6 +5,8 @@ import { globalErrorHandler } from "../../helpers/responseHandler";
 import SidebarChatUser from "../chat/SidebarChatUser";
 import { useChatStore } from "../../store/useChatStore";
 import SidebarSkeleton from "../skeletons/SidebarSkeleton";
+import { useAuthStore } from "../../store/useAuthStore";
+import { useSocketStore } from "../../store/useSocketStore";
 
 const Sidebar = () => {
   //! State
@@ -12,12 +14,10 @@ const Sidebar = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  //! Accessing store to get online users and setOnlineUsers action
-  const onlineUsers = useChatStore((state) => state.onlineUsers);
-  const setOnlineUsers = useChatStore((state) => state.setOnlineUsers);
-
-  //! access the state and action from the store
-  const selectedChatUser = useChatStore((state) => state.selectedChatUser);
+  //! Accessing store to perform actions
+  const onlineUsers = useSocketStore((store) => store.onlineUsers);
+  const setOnlineUsers = useChatStore((store) => store.setOnlineUsers);
+  const selectedChatUser = useChatStore((store) => store.selectedChatUser);
 
   useEffect(() => {
     const fetchUsers = async () => {

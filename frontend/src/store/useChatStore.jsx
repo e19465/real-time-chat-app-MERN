@@ -24,7 +24,9 @@ export const useChatStore = create((set, get) => ({
     );
     set({ selectedChatUser: user });
   },
+
   clearSelectedChatUser: () => {
+    sessionStorage.removeItem(SessionStorageKeys.SELECTED_CHAT_USER);
     set({ selectedChatUser: null });
   },
 

@@ -1,7 +1,7 @@
 const sendEmail = require("../services/EmailService");
 const User = require("../models/User");
 const { generateOtp, normalizeEmail } = require("./Utils");
-const { otpSendEmailTypes } = require("../constants/common");
+const { OtpSendEmailTypes } = require("../constants/common");
 const { NotFoundError, BadRequestError } = require("../helpers/CustomErrors");
 
 class EmailOtpHandler {
@@ -17,11 +17,11 @@ class EmailOtpHandler {
       const sixDigitOtp = generateOtp(6); // Function to generate a 6-digit OTP
       const oneHourFromNow = Date.now() + 1 * 60 * 60 * 1000; // 1-hour expiration
 
-      if (type === otpSendEmailTypes.email) {
+      if (type === OtpSendEmailTypes.EMAIL) {
         // Set or update email verification fields
         user.emailVerificationToken = sixDigitOtp;
         user.emailVerificationTokenExpires = oneHourFromNow;
-      } else if (type === otpSendEmailTypes.password) {
+      } else if (type === OtpSendEmailTypes.PASSWORD) {
         // Set or update password reset fields
         user.passwordResetToken = sixDigitOtp;
         user.passwordResetTokenExpires = oneHourFromNow;
@@ -46,7 +46,7 @@ class EmailOtpHandler {
         throw new NotFoundError(`User with email ${email} not found`);
       }
 
-      if (type === otpSendEmailTypes.email) {
+      if (type === OtpSendEmailTypes.EMAIL) {
         // Verify email OTP
         if (user.emailVerificationToken !== otp) {
           throw new BadRequestError("Invalid OTP");
@@ -76,7 +76,7 @@ class EmailOtpHandler {
           }
         );
         return true;
-      } else if (type === otpSendEmailTypes.password) {
+      } else if (type === OtpSendEmailTypes.PASSWORD) {
         // Verify password reset OTP
         if (user.passwordResetToken !== otp) {
           throw new BadRequestError("Invalid OTP");

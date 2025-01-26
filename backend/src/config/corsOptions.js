@@ -1,5 +1,7 @@
 require("dotenv").config();
 const allowedOrigins = process.env.ALLOWED_ORIGINS.split(",");
+const allowedHeaders = process.env.ALLOWED_HEADERS.split(",");
+const allowCredentials = process.env.ALLOW_CREDENTIALS === "true";
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -9,15 +11,9 @@ const corsOptions = {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true,
+  credentials: allowCredentials,
   optionsSuccessStatus: 200,
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "Accept",
-    "Origin",
-  ],
+  allowedHeaders: allowedHeaders,
 };
 
 module.exports = corsOptions;
