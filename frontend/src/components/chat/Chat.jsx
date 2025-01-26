@@ -8,7 +8,7 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { checkUrlIsImage, getFileType } from "../../helpers/shared";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
 import { useChatStore } from "../../store/useChatStore";
-import Modal from "../common/Modal";
+import Modal from "../shared/Modal";
 
 const Chat = ({ user }) => {
   //! Hooks

@@ -1,7 +1,7 @@
 const { Server } = require("socket.io");
 const express = require("express");
 const http = require("http");
-const { SocketKeys, SocketRelatedMethods } = require("../constants/common");
+const { SocketKeys, SocketRelatedMethods } = require("../constants/shared");
 require("dotenv").config();
 
 //! environment variables

@@ -2,7 +2,7 @@ import { Eye, EyeOff, Lock } from "lucide-react";
 import MainLayout from "../../layouts/MainLayout";
 import { useState } from "react";
 import InputContainer from "../../components/auth/InputContainer";
-import LoadingText from "../../components/common/LoadingText";
+import LoadingText from "../../components/shared/LoadingText";
 import AuthService from "../../services/AuthService";
 import {
   globalErrorHandler,

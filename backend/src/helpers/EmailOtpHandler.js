@@ -1,7 +1,7 @@
 const sendEmail = require("../services/EmailService");
 const User = require("../models/User");
 const { generateOtp, normalizeEmail } = require("./Utils");
-const { OtpSendEmailTypes } = require("../constants/common");
+const { OtpSendEmailTypes } = require("../constants/shared");
 const { NotFoundError, BadRequestError } = require("../helpers/CustomErrors");
 
 class EmailOtpHandler {

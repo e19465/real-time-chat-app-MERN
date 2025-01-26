@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { ModalNames } = require("../constants/common");
+const { ModalNames } = require("../constants/shared");
 
 const messageSchema = new mongoose.Schema(
   {

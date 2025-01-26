@@ -6,7 +6,7 @@ import {
   globalErrorHandler,
   globalSuccessHandler,
 } from "../../helpers/responseHandler";
-import LoadingText from "../common/LoadingText";
+import LoadingText from "../shared/LoadingText";
 import { BackendNeededKeys } from "../../constants/shared";
 
 const ProfilePicture = ({ isOwnerProfile, profilePicUrl }) => {

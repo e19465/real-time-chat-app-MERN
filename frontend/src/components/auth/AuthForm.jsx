@@ -1,4 +1,4 @@
-import LoadingText from "../common/LoadingText";
+import LoadingText from "../shared/LoadingText";
 
 const AuthForm = ({
   children,
