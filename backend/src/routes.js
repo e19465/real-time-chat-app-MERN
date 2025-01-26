@@ -1,11 +1,6 @@
 const routes = require("./routes/index");
 const path = require("path");
 const HttpStatus = require("./constants/httpStatus");
-const dotenv = require("dotenv");
-
-//! configurations
-dotenv.config();
-const PORT = process.env.PORT || 5000;
 
 function serverRoutes(app) {
   //! root route
@@ -47,11 +42,6 @@ function serverRoutes(app) {
     } else {
       res.type("txt").send("404 Not Found");
     }
-  });
-
-  //! app listening to port
-  app.listen(PORT, () => {
-    console.log(`Chat MERN server is running on port ${PORT}`);
   });
 }
 
