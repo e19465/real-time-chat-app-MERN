@@ -9,13 +9,18 @@ import { CommonPageUrls } from "../../constants/pageUrls";
 import InputContainer from "../../components/auth/InputContainer";
 import { formatDateFromMongoDbDate } from "../../helpers/shared";
 import AuthService from "../../services/AuthService";
+import { useSocketStore } from "../../store/useSocketStore";
 
 const UserProfilePage = () => {
   //! Hooks
   const navigate = useNavigate();
   const { userId } = useParams();
 
+  //! Access the state variables
+  const onlineUsers = useSocketStore((store) => store.onlineUsers);
+
   //! State variables
+  const [isOnline, setIsOnline] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
   const [profileDataLoading, setProfileDataLoading] = useState(false);
   const [accessCheckLoading, setAccessCheckLoading] = useState(false);
@@ -67,6 +72,15 @@ const UserProfilePage = () => {
       }
     }
   }, [userProfile]);
+
+  //! Check if user is online
+  useEffect(() => {
+    if (onlineUsers.includes(userId)) {
+      setIsOnline(true);
+    } else {
+      setIsOnline(false);
+    }
+  }, [onlineUsers]);
 
   return (
     <MainLayout>
@@ -147,7 +161,19 @@ const UserProfilePage = () => {
 
                   <div className="w-full h-auto flex items-center justify-between">
                     <span>Status</span>
-                    <span>active</span>
+                    <span>
+                      {isOnline ? (
+                        <div className="flex gap-2 items-center justify-center">
+                          <span className="bg-green-500 size-3 rounded-full"></span>
+                          <span className="">Online</span>
+                        </div>
+                      ) : (
+                        <div className="flex gap-2 items-center justify-center">
+                          <span className="bg-red-500 size-3 rounded-full"></span>
+                          <span className="">Offline</span>
+                        </div>
+                      )}
+                    </span>
                   </div>
                 </div>
               </div>
