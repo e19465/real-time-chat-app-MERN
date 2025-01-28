@@ -47,7 +47,6 @@ export const useSocketStore = create((set, get) => ({
 
     // Add listener for new messages
     socket.on(SocketKeys.SEND_NEW_MESSAGE, (message) => {
-      console.log("Received new message: ", message);
       useChatStore.getState().addMessage(message);
     });
     console.log("Subscribed to new messages.");
