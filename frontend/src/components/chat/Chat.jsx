@@ -175,7 +175,6 @@ const Chat = ({ user }) => {
                         <a
                           key={index}
                           href={file}
-                          target="_blank"
                           rel="noopener noreferrer"
                           className="block mt-1 text-blue-600 underline text-xs"
                         >
