@@ -2,8 +2,7 @@
 //! >> Supply these all environment variables in production environment << !//
 
 // Databse URI
-const MONGODB_CONNECTION_URI =
-  "mongodb+srv://sasindudil0002:xrIktyXOrrFcDhZj@chat-mern.8z2th.mongodb.net/chat_db?retryWrites=true&w=majority&appName=chat-mern";
+const MONGODB_CONNECTION_URI = "";
 
 // App Settings
 const PORT = 5000;
