@@ -53,6 +53,7 @@ export const useSocketStore = create((set, get) => ({
   },
 
   // Unsubscribe to messages
+  // TODO: Optimize this later
   unSubscribeToMessages: () => {
     const socket = getSocket();
     if (socket) {
