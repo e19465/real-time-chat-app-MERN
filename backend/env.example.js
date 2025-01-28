@@ -21,9 +21,9 @@ const ACCESS_TOKEN_SECRET = "";
 const REFRESH_TOKEN_SECRET = "";
 
 // Google OAuth and Email
-const SD_CHAT_SUPPORT_EMAIL = "sdchatmern@gmail.com";
-const APP_EMAIL = "sdchatmern@gmail.com";
-const APP_EMAIL_PASSWORD = "mqgrtnckzfkenehf";
+const SD_CHAT_SUPPORT_EMAIL = "";
+const APP_EMAIL = "";
+const APP_EMAIL_PASSWORD = "";
 
 // Cloudinary
 const CLOUDINARY_CLOUD_NAME = "";
