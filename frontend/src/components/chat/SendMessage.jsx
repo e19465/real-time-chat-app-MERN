@@ -40,6 +40,7 @@ const SendMessage = ({ user }) => {
         formData.append("files", file);
       });
       MessageService.createMessage(user._id, formData);
+    } catch (err) {
       globalErrorHandler(err, "Error sending message", "Error sending message");
     } finally {
       setSending(false);

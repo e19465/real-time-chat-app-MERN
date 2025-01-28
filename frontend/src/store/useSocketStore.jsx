@@ -37,6 +37,7 @@ export const useSocketStore = create((set, get) => ({
   // subscribe to messages
   subscribeToMessages: () => {
     const { isAuthenticated } = useAuthStore.getState();
+    const { selectedChatUser } = useChatStore.getState();
     const socket = getSocket();
     if (!socket || !isAuthenticated()) {
       return;
@@ -47,7 +48,17 @@ export const useSocketStore = create((set, get) => ({
 
     // Add listener for new messages
     socket.on(SocketKeys.SEND_NEW_MESSAGE, (message) => {
-      useChatStore.getState().addMessage(message);
+      console.log("sender: ", message.senderId);
+      console.log("receiver: ", message.receiverId);
+      console.log("selectedChatUser: ", selectedChatUser._id);
+      if (
+        message.senderId === selectedChatUser._id ||
+        message.receiverId === selectedChatUser._id
+      ) {
+        useChatStore.getState().addMessage(message);
+      } else {
+        console.log("Message received from another user.");
+      }
     });
     console.log("Subscribed to new messages.");
   },
@@ -75,7 +86,6 @@ export const useSocketStore = create((set, get) => ({
 
     // Add listener for message deletion
     socket.on(SocketKeys.DELETE_MESSAGE, (messageIds) => {
-      console.log("Received message deletion: ", messageIds);
       useChatStore.getState().deleteMessages(messageIds);
     });
     console.log("Subscribed to message deletion.");

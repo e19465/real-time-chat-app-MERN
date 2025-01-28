@@ -51,3 +51,11 @@ export const useChatStore = create((set, get) => ({
     }));
   },
 }));
+
+// Listen for session storage updates and sync Zustand state
+window.addEventListener("storage", (event) => {
+  if (event.key === SessionStorageKeys.SELECTED_CHAT_USER) {
+    const updatedUser = event.newValue ? JSON.parse(event.newValue) : null;
+    useChatStore.getState().setSelectedChatUser(updatedUser);
+  }
+});
