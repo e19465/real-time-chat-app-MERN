@@ -2,7 +2,6 @@ const ErrorHandler = require("../helpers/ErrorHandler");
 const SuccessHandler = require("../helpers/SuccessHandler");
 const Message = require("../models/Message");
 const FileService = require("../services/FileService");
-const User = require("../models/User");
 const {
   sendMessageRealTimeSocket,
   deleteMessageRealTimeSocket,
@@ -94,6 +93,7 @@ class MessageController {
     }
   }
 
+  //! delete messages
   async deleteMessages(req, res) {
     try {
       // obtain the current user id and the user to chat user id from the request, check if they exist

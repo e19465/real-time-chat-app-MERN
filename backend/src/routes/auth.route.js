@@ -61,6 +61,7 @@ authRouter.get(
  * 7. Reset Password - POST - http://localhost:5000/api/auth/reset-password
  * 8. Refresh Tokens - POST - http://localhost:5000/api/auth/refresh-tokens
  * 9. Change Password - POST - http://localhost:5000/api/auth/change-password
+ * 10. Check Is Authenticated - GET - http://localhost:5000/api/auth/check-is-authenticated/:userId
  */
 
 module.exports = authRouter;

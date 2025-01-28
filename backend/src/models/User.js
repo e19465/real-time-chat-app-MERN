@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ModalNames } = require("../constants/shared");
 
 const userSchema = new mongoose.Schema(
   {
@@ -39,4 +40,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model(ModalNames.USER, userSchema);
