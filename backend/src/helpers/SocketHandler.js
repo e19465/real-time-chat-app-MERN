@@ -2,34 +2,52 @@ const { io } = require("../config/socket");
 const { SocketRelatedMethods, SocketKeys } = require("../constants/shared");
 
 //! online users
-const userSocketMap = {}; // { userId: socketId }
+const userSocketMap = new Map(); // userId -> socketId
+
+// Get user socket id
+const getUserSocketId = (userId) => {
+  return userSocketMap.get(userId.toString());
+};
+
+const sendMessageRealTimeSocket = (message) => {
+  // console.log("Sending message in real time: ", message);
+  const senderSocketId = getUserSocketId(message.senderId);
+  const receiverSocketId = getUserSocketId(message.receiverId);
+
+  if (senderSocketId) {
+    // console.log("Sending message to sender: ", message.senderId);
+    io.to(senderSocketId).emit(SocketKeys.SEND_NEW_MESSAGE, message);
+  }
+
+  if (receiverSocketId) {
+    // console.log("Sending message to receiver: ", message.receiverId);
+    io.to(receiverSocketId).emit(SocketKeys.SEND_NEW_MESSAGE, message);
+  }
+};
 
 // Export a function to initialize socket listeners
 const initializeSocketListeners = () => {
   io.on(SocketRelatedMethods.CONNECTION, (socket) => {
-    console.log("A user connected: ", socket.id);
     const userId = socket.handshake.query.userId;
     if (userId) {
-      userSocketMap[userId] = socket.id;
+      console.log(`User connected: ${userId} with socketId: ${socket.id}`);
+      userSocketMap.set(userId, socket.id);
     }
 
     // io.emit() is used to broadcast to all connected clients
-    io.emit(SocketKeys.GET_ONLINE_USERS, Object.keys(userSocketMap));
+    io.emit(SocketKeys.GET_ONLINE_USERS, Array.from(userSocketMap.keys()));
 
+    //! Disconnect from socket
     socket.on(SocketRelatedMethods.DISCONNECT, () => {
       console.log("A user disconnected: ", socket.id);
-      delete userSocketMap[userId];
-      // Emit the updated list of online users
-      io.emit(SocketKeys.GET_ONLINE_USERS, Object.keys(userSocketMap));
+      userSocketMap.delete(userId);
+      io.emit(SocketKeys.GET_ONLINE_USERS, Array.from(userSocketMap.keys()));
     });
   });
-};
-
-const getUserSocketId = (userId) => {
-  return userSocketMap[userId];
 };
 
 module.exports = {
   initializeSocketListeners,
   getUserSocketId,
+  sendMessageRealTimeSocket,
 };

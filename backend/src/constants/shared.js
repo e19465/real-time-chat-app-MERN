@@ -9,6 +9,7 @@ const MongoDbErrorCodes = {
 
 const SocketKeys = {
   GET_ONLINE_USERS: "getOnlineUsers",
+  SEND_NEW_MESSAGE: "sendNewMessage",
 };
 
 const ModalNames = {

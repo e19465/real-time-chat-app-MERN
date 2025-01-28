@@ -9,17 +9,26 @@ import { checkUrlIsImage, getFileType } from "../../helpers/shared";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
 import { useChatStore } from "../../store/useChatStore";
 import Modal from "../shared/Modal";
+import { useSocketStore } from "../../store/useSocketStore";
+import { useSocket } from "../../context/SocketContext";
 
 const Chat = ({ user }) => {
   //! Hooks
   const chatContainerRef = useRef(null);
   const navigate = useNavigate();
+  const socket = useSocket();
 
   //! Access store to perform actions
   const loggedInUserId = useAuthStore((store) => store.userId);
   const messages = useChatStore((store) => store.messages);
   const setMessages = useChatStore((store) => store.setMessages);
   const clearMessageById = useChatStore((store) => store.clearMessageById);
+  const subscribeToMessages = useSocketStore(
+    (store) => store.subscribeToMessages
+  );
+  const unSubscribeToMessages = useSocketStore(
+    (store) => store.unSubscribeToMessages
+  );
 
   //! State
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -111,6 +120,19 @@ const Chat = ({ user }) => {
       setModalOpen(false);
     }
   };
+
+  //! Subscribe to messages when the component mounts
+  useEffect(() => {
+    const subscribe = async () => {
+      console.log("Subscribing to messages inside chat component");
+      await subscribeToMessages();
+
+      return async () => {
+        await unSubscribeToMessages();
+      };
+    };
+    subscribe();
+  }, [socket]);
 
   return (
     <div

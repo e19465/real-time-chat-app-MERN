@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 const serveRoutes = require("./routes");
 const connectToMongoDB = require("./db");
 const { app, io, server } = require("./config/socket");
+const { initializeSocketListeners } = require("./helpers/SocketHandler");
 
 //! configurations
 dotenv.config();
@@ -34,6 +35,9 @@ connectToMongoDB(app).then(() => {
   //! Serve routes
   serveRoutes(app);
 });
+
+//! initialize socket listeners
+initializeSocketListeners();
 
 //! app listening to port
 server.listen(PORT, () => {
