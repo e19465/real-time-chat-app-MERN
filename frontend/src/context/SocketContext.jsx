@@ -37,12 +37,12 @@ export const SocketProvider = ({ children }) => {
       const socket = socketRef.current;
 
       socket.on("connect", () => {
-        console.log("Connected to socket server");
+        // console.log("Connected to socket server");
         subscribeToOnlineUsers();
       });
 
       return () => {
-        console.log("Disconnecting from socket");
+        // console.log("Disconnecting from socket");
         unSubscribeToOnlineUsers();
         socket.disconnect();
         socketInstance = null; // Clear the global instance

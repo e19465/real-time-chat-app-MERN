@@ -1,10 +1,10 @@
 import axios from "axios";
 import { AuthPageUrls } from "../constants/pageUrls";
 import { globalErrorHandler } from "../helpers/responseHandler";
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+import AuthService from "../services/AuthService";
 
 const axiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: import.meta.env.VITE_BACKEND_URL,
   withCredentials: true, // Include credentials (cookies) in requests.
 });
 
@@ -32,9 +32,7 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true; // Mark the request as retried to avoid infinite loops.
       try {
         // Make a request to your auth server to refresh the token using cookies.
-        await axios.post(`${BASE_URL}/auth/refresh-tokens`, null, {
-          withCredentials: true, // Ensure cookies are included in the refresh request.
-        });
+        await AuthService.refreshTokens();
 
         // Retry the original request after the token is refreshed.
         return axiosInstance(originalRequest);

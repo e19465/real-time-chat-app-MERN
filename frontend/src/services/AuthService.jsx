@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosInstance from "../interceptors/jwtInterceptor";
 
 class AuthService {
@@ -126,6 +127,23 @@ class AuthService {
     } catch (error) {
       console.error("Error checking logged in user with params id", error);
       throw error;
+    }
+  }
+
+  // refresh tokens
+  async refreshTokens() {
+    try {
+      console.log("Refreshing tokens...");
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/auth/refresh-tokens`,
+        null,
+        {
+          withCredentials: true, // Ensure cookies are included in the refresh request.
+        }
+      );
+    } catch (err) {
+      console.error("Error in refreshTokens: ", err);
+      throw err;
     }
   }
 }

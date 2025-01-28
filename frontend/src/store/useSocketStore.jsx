@@ -48,28 +48,25 @@ export const useSocketStore = create((set, get) => ({
 
     // Add listener for new messages
     socket.on(SocketKeys.SEND_NEW_MESSAGE, (message) => {
-      console.log("sender: ", message.senderId);
-      console.log("receiver: ", message.receiverId);
-      console.log("selectedChatUser: ", selectedChatUser._id);
+      // console.log("sender: ", message.senderId);
+      // console.log("receiver: ", message.receiverId);
+      // console.log("selectedChatUser: ", selectedChatUser._id);
       if (
         message.senderId === selectedChatUser._id ||
         message.receiverId === selectedChatUser._id
       ) {
         useChatStore.getState().addMessage(message);
-      } else {
-        console.log("Message received from another user.");
       }
     });
-    console.log("Subscribed to new messages.");
+    // console.log("Subscribed to new messages.");
   },
 
   // Unsubscribe to messages
-  // TODO: Optimize this later
   unSubscribeToMessages: () => {
     const socket = getSocket();
     if (socket) {
       socket.off(SocketKeys.RECEIVE_NEW_MESSAGE);
-      console.log("Cleared new message listeners.");
+      // console.log("Cleared new message listeners.");
     }
   },
 
@@ -88,7 +85,7 @@ export const useSocketStore = create((set, get) => ({
     socket.on(SocketKeys.DELETE_MESSAGE, (messageIds) => {
       useChatStore.getState().deleteMessages(messageIds);
     });
-    console.log("Subscribed to message deletion.");
+    // console.log("Subscribed to message deletion.");
   },
 
   // Unsubscribe to message deletion
@@ -96,7 +93,7 @@ export const useSocketStore = create((set, get) => ({
     const socket = getSocket();
     if (socket) {
       socket.off(SocketKeys.DELETE_MESSAGE);
-      console.log("Cleared message deletion listeners.");
+      // console.log("Cleared message deletion listeners.");
     }
   },
 }));
