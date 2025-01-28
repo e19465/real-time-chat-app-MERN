@@ -3,7 +3,10 @@ const SuccessHandler = require("../helpers/SuccessHandler");
 const Message = require("../models/Message");
 const FileService = require("../services/FileService");
 const User = require("../models/User");
-const { sendMessageRealTimeSocket } = require("../helpers/SocketHandler");
+const {
+  sendMessageRealTimeSocket,
+  deleteMessageRealTimeSocket,
+} = require("../helpers/SocketHandler");
 
 class MessageController {
   //! create message
@@ -140,6 +143,7 @@ class MessageController {
         }
       }
       const deletedImages = await FileService.deleteFilesByUrls(imagesToDelete);
+      deleteMessageRealTimeSocket(foundMessages);
 
       // return a success response with the deleted messages and images
       return SuccessHandler.handle200(

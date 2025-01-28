@@ -3,7 +3,6 @@ import { SessionStorageKeys } from "../constants/shared";
 
 export const useChatStore = create((set, get) => ({
   messages: [],
-  users: [],
   selectedChatUser: sessionStorage.getItem(
     SessionStorageKeys.SELECTED_CHAT_USER
   )
@@ -44,15 +43,11 @@ export const useChatStore = create((set, get) => ({
     }));
   },
 
-  clearMessages: () => {
-    set({ messages: [] });
-  },
-
-  setUsers: (users) => {
-    set({ users });
-  },
-
-  clearUsers: () => {
-    set({ users: [] });
+  deleteMessages: (messageIds) => {
+    set((state) => ({
+      messages: state.messages.filter(
+        (message) => !messageIds.includes(message._id)
+      ),
+    }));
   },
 }));

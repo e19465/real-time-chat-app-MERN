@@ -36,6 +36,7 @@ export const AppSettings = {
 export const SocketKeys = {
   GET_ONLINE_USERS: "getOnlineUsers",
   SEND_NEW_MESSAGE: "sendNewMessage",
+  DELETE_MESSAGE: "deleteMessage",
 };
 
 export const THEMES = [

@@ -61,4 +61,32 @@ export const useSocketStore = create((set, get) => ({
       console.log("Cleared new message listeners.");
     }
   },
+
+  // Subscribe to message deletion
+  subscribeToDeleteMessage: () => {
+    const { isAuthenticated } = useAuthStore.getState();
+    const socket = getSocket();
+    if (!socket || !isAuthenticated()) {
+      return;
+    }
+
+    // Prevent duplicate listeners by removing previous ones
+    socket.off(SocketKeys.DELETE_MESSAGE);
+
+    // Add listener for message deletion
+    socket.on(SocketKeys.DELETE_MESSAGE, (messageIds) => {
+      console.log("Received message deletion: ", messageIds);
+      useChatStore.getState().deleteMessages(messageIds);
+    });
+    console.log("Subscribed to message deletion.");
+  },
+
+  // Unsubscribe to message deletion
+  unSubscribeToDeleteMessage: () => {
+    const socket = getSocket();
+    if (socket) {
+      socket.off(SocketKeys.DELETE_MESSAGE);
+      console.log("Cleared message deletion listeners.");
+    }
+  },
 }));

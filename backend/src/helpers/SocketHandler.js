@@ -9,6 +9,7 @@ const getUserSocketId = (userId) => {
   return userSocketMap.get(userId.toString());
 };
 
+// Send message in real time
 const sendMessageRealTimeSocket = (message) => {
   // console.log("Sending message in real time: ", message);
   const senderSocketId = getUserSocketId(message.senderId);
@@ -22,6 +23,16 @@ const sendMessageRealTimeSocket = (message) => {
   if (receiverSocketId) {
     // console.log("Sending message to receiver: ", message.receiverId);
     io.to(receiverSocketId).emit(SocketKeys.SEND_NEW_MESSAGE, message);
+  }
+};
+
+// Delete message in real time
+const deleteMessageRealTimeSocket = (messages) => {
+  const receiverSocketId = getUserSocketId(messages[0]?.receiverId);
+  const messageIds = messages.map((message) => message._id);
+  if (receiverSocketId) {
+    // console.log("Deleting message to receiver: ", message.receiverId);
+    io.to(receiverSocketId).emit(SocketKeys.DELETE_MESSAGE, messageIds);
   }
 };
 
@@ -50,4 +61,5 @@ module.exports = {
   initializeSocketListeners,
   getUserSocketId,
   sendMessageRealTimeSocket,
+  deleteMessageRealTimeSocket,
 };

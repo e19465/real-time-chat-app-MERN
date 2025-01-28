@@ -29,6 +29,12 @@ const Chat = ({ user }) => {
   const unSubscribeToMessages = useSocketStore(
     (store) => store.unSubscribeToMessages
   );
+  const subscribeToDeleteMessage = useSocketStore(
+    (store) => store.subscribeToDeleteMessage
+  );
+  const unSubscribeToDeleteMessage = useSocketStore(
+    (store) => store.unSubscribeToDeleteMessage
+  );
 
   //! State
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -123,12 +129,13 @@ const Chat = ({ user }) => {
 
   //! Subscribe to messages when the component mounts
   useEffect(() => {
-    const subscribe = async () => {
-      console.log("Subscribing to messages inside chat component");
-      await subscribeToMessages();
+    const subscribe = () => {
+      subscribeToMessages();
+      subscribeToDeleteMessage();
 
-      return async () => {
-        await unSubscribeToMessages();
+      return () => {
+        unSubscribeToMessages();
+        unSubscribeToDeleteMessage();
       };
     };
     subscribe();
