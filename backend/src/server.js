@@ -31,15 +31,20 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "static")));
 
 //! connect to MongoDB and serve routes and start server
-connectToMongoDB(app).then(() => {
-  //! Serve routes
-  serveRoutes(app);
-});
+connectToMongoDB()
+  .then(() => {
+    //! Serve routes
+    serveRoutes(app);
 
-//! initialize socket listeners
-initializeSocketListeners();
+    //! initialize socket listeners
+    initializeSocketListeners();
 
-//! app listening to port
-server.listen(PORT, () => {
-  console.log(`Chat MERN server is running on port ${PORT}`);
-});
+    //! app listening to port
+    server.listen(PORT, () => {
+      console.log(`Chat MERN server is running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("Something went wrong: ", err);
+    process.exit(1);
+  });

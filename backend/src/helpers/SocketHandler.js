@@ -38,6 +38,7 @@ const deleteMessageRealTimeSocket = (messages) => {
 
 // Export a function to initialize socket listeners
 const initializeSocketListeners = () => {
+  console.log("Initializing socket listeners...");
   io.on(SocketRelatedMethods.CONNECTION, (socket) => {
     const userId = socket.handshake.query.userId;
     if (userId) {
