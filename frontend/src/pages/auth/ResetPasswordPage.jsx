@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AuthLayout from "../../layouts/AuthLayout";
-import { AnimationTypes, LocalStorageKeys } from "../../constants/shared";
+import { AnimationTypes } from "../../constants/shared";
 import AuthService from "../../services/AuthService";
 import {
   globalErrorHandler,
@@ -14,15 +14,23 @@ import { Eye, EyeOff, Key, Lock, Mail, MessageSquare } from "lucide-react";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
 import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const ResetPasswordPage = () => {
   //! Hooks
   const navigate = useNavigate();
 
+  //! Accessing store to perform actions
+  const passwordResetSendedEmail = useAuthStore(
+    (store) => store.passwordResetSendedEmail
+  );
+  const clearPasswordResetSendedEmail = useAuthStore(
+    (store) => store.clearPasswordResetSendedEmail
+  );
+
   //! State variables
   const [formData, setFormData] = useState({
-    email:
-      localStorage.getItem(LocalStorageKeys.PASSWORD_VER_OTP_SEND_EMAIL) || "",
+    email: passwordResetSendedEmail,
     otp: "",
     password: "",
     confirmPassword: "",
@@ -47,7 +55,7 @@ const ResetPasswordPage = () => {
       setLoading(true);
       const response = await AuthService.resetPassword(formData);
       globalSuccessHandler(response, "Password reset successful");
-      localStorage.removeItem(LocalStorageKeys.PASSWORD_VER_OTP_SEND_EMAIL);
+      clearPasswordResetSendedEmail();
       navigate(AuthPageUrls.signIn);
     } catch (err) {
       globalErrorHandler(

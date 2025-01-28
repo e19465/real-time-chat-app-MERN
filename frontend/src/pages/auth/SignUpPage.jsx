@@ -6,15 +6,7 @@ import {
 } from "../../helpers/responseHandler";
 import AuthService from "../../services/AuthService";
 import { useNavigate } from "react-router-dom";
-import {
-  MessageSquare,
-  Mail,
-  Lock,
-  User,
-  Loader,
-  Eye,
-  EyeOff,
-} from "lucide-react";
+import { MessageSquare, Mail, Lock, User, Eye, EyeOff } from "lucide-react";
 import { AuthPageUrls } from "../../constants/pageUrls";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
 import { AnimationTypes } from "../../constants/shared";

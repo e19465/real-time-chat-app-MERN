@@ -8,12 +8,13 @@ import {
   globalErrorHandler,
   globalSuccessHandler,
 } from "../../helpers/responseHandler";
-import { AnimationTypes, LocalStorageKeys } from "../../constants/shared";
+import { AnimationTypes } from "../../constants/shared";
 import { AuthPageUrls } from "../../constants/pageUrls";
 import { Mail, MessageSquare } from "lucide-react";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
 import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const SendPasswordResetEmailPage = () => {
   //! Hooks
@@ -22,6 +23,11 @@ const SendPasswordResetEmailPage = () => {
   //! State variables
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+
+  //! Accessing store to perform actions
+  const setPasswordResetSendedEmail = useAuthStore(
+    (store) => store.setPasswordResetSendedEmail
+  );
 
   //! Handle form submission and send password reset email
   const handleSubmit = async (e) => {
@@ -33,7 +39,7 @@ const SendPasswordResetEmailPage = () => {
         response,
         "Password reset OTP has been successfully sent to your email"
       );
-      localStorage.setItem(LocalStorageKeys.PASSWORD_VER_OTP_SEND_EMAIL, email);
+      setPasswordResetSendedEmail(email);
       navigate(AuthPageUrls.resetPassword);
     } catch (err) {
       globalErrorHandler(
@@ -45,6 +51,7 @@ const SendPasswordResetEmailPage = () => {
       setLoading(false);
     }
   };
+
   return (
     <AuthLayout>
       <LeftRegionContainer region="left">

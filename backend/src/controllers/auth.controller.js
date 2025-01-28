@@ -245,7 +245,7 @@ class AuthController {
       // Save user otp in db
       const sixDigitOtp = await EmailOtpHandler.sendOtp(
         email,
-        OtpSendEmailTypes.EMAIL
+        OtpSendEmailTypes.PASSWORD
       );
 
       // Send password reset email with otp

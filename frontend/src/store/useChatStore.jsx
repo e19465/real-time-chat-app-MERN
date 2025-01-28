@@ -8,14 +8,8 @@ export const useChatStore = create((set, get) => ({
   )
     ? JSON.parse(sessionStorage.getItem(SessionStorageKeys.SELECTED_CHAT_USER))
     : null,
-  onlineUsers: [],
 
-  // Set online users
-  setOnlineUsers: (users) => {
-    set({ onlineUsers: users });
-  },
-
-  //TODO: optimize this later
+  // used to set the selected chat user (user to chat) when clicked on a user
   setSelectedChatUser: (user) => {
     sessionStorage.setItem(
       SessionStorageKeys.SELECTED_CHAT_USER,
@@ -24,25 +18,30 @@ export const useChatStore = create((set, get) => ({
     set({ selectedChatUser: user });
   },
 
+  // used to clear the selected chat user when the chat is closed
   clearSelectedChatUser: () => {
     sessionStorage.removeItem(SessionStorageKeys.SELECTED_CHAT_USER);
     set({ selectedChatUser: null });
   },
 
+  // used to add a new message to the messages array
   addMessage: (message) => {
     set((state) => ({ messages: [...state.messages, message] }));
   },
 
+  // used to set the messages array
   setMessages: (messages) => {
     set({ messages });
   },
 
+  // used to clear a message by its id
   clearMessageById: (messageId) => {
     set((state) => ({
       messages: state.messages.filter((message) => message._id !== messageId),
     }));
   },
 
+  // used to delete messages by their ids
   deleteMessages: (messageIds) => {
     set((state) => ({
       messages: state.messages.filter(

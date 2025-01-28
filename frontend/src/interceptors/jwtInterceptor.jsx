@@ -43,8 +43,14 @@ axiosInstance.interceptors.response.use(
           "Token refresh failed",
           "Session Expired"
         );
+        // clear data from storges
         localStorage.clear();
+        sessionStorage.clear();
+
+        // Redirect to the login page.
         window.location.href = AuthPageUrls.signIn;
+
+        // Return the error to the original request.
         return Promise.reject(refreshError);
       }
     }

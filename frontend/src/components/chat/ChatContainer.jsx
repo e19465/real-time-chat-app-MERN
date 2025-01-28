@@ -9,9 +9,7 @@ const ChatContainer = ({ user }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
-      //TODO: Fetch chat messages
-    } else {
+    if (!user) {
       navigate(CommonPageUrls.home, { replace: true });
     }
   }, [user]);

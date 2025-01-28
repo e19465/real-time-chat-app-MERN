@@ -12,13 +12,22 @@ import { Mail, MessageSquare } from "lucide-react";
 import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 import AuthForm from "../../components/auth/AuthForm";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
-import { AnimationTypes, LocalStorageKeys } from "../../constants/shared";
+import { AnimationTypes } from "../../constants/shared";
 import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const SendEmailVerificationPage = () => {
+  //! Hooks
   const navigate = useNavigate();
+
+  //! State
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+
+  //! Accessing store to perform actions
+  const setEmailVerSendedEmail = useAuthStore(
+    (store) => store.setEmailVerSendedEmail
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +38,7 @@ const SendEmailVerificationPage = () => {
         response,
         "Email verification OTP has been successfully sent to your email"
       );
-      localStorage.setItem(LocalStorageKeys.EMAIL_VER_OTP_SEND_EMAIL, email);
+      setEmailVerSendedEmail(email);
       navigate(AuthPageUrls.verifyEmail);
     } catch (err) {
       globalErrorHandler(

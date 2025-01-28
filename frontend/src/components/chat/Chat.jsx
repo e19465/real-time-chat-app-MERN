@@ -113,7 +113,6 @@ const Chat = ({ user }) => {
       const response = await MessageService.deleteMessages(user._id, [
         messageToDeleteId,
       ]);
-      console.log("Deleted message: ", response);
       clearMessageById(messageToDeleteId);
     } catch (err) {
       globalErrorHandler(

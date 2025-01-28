@@ -11,18 +11,25 @@ import LeftRegionContainer from "../../components/auth/LeftRegionContainer";
 import { Key, Mail, MessageSquare } from "lucide-react";
 import InputContainer from "../../components/auth/InputContainer";
 import AuthImagePattern from "../../components/auth/AuthImagePattern";
-import { AnimationTypes, LocalStorageKeys } from "../../constants/shared";
+import { AnimationTypes } from "../../constants/shared";
 import AuthForm from "../../components/auth/AuthForm";
 import AuthUsefullLinks from "../../components/auth/AuthUsefullLinks";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const VerifyEmailPage = () => {
   //! Hooks
   const navigate = useNavigate();
 
-  //! State variables
-  const [email, setEmail] = useState(
-    localStorage.getItem(LocalStorageKeys.EMAIL_VER_OTP_SEND_EMAIL) || ""
+  //! Accessing store to perform actions
+  const emailVerSendedEmail = useAuthStore(
+    (store) => store.emailVerSendedEmail
   );
+  const clearEmailVerSendedEmail = useAuthStore(
+    (store) => store.clearEmailVerSendedEmail
+  );
+
+  //! State variables
+  const [email, setEmail] = useState(emailVerSendedEmail);
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -33,7 +40,7 @@ const VerifyEmailPage = () => {
       setLoading(true);
       const response = await AuthService.verifyEmail(email, otp);
       globalSuccessHandler(response, "Email verified successfully");
-      localStorage.removeItem(LocalStorageKeys.EMAIL_VER_OTP_SEND_EMAIL);
+      clearEmailVerSendedEmail();
       navigate(AuthPageUrls.signIn);
     } catch (err) {
       globalErrorHandler(

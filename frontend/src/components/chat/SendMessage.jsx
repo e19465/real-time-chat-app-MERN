@@ -1,7 +1,5 @@
 import { Loader2Icon, Paperclip, SendIcon, XCircle } from "lucide-react";
 import { useState } from "react";
-import { useChatStore } from "../../store/useChatStore";
-import { useAuthStore } from "../../store/useAuthStore";
 import MessageService from "../../services/MessageService";
 import { globalErrorHandler } from "../../helpers/responseHandler";
 
@@ -10,11 +8,6 @@ const SendMessage = ({ user }) => {
   const [message, setMessage] = useState("");
   const [files, setFiles] = useState([]);
   const [sending, setSending] = useState(false);
-
-  //! Access store to perform actions
-  const userId = useAuthStore((store) => store.userId);
-  const addMessage = useChatStore((store) => store.addMessage);
-  const clearMessageById = useChatStore((store) => store.clearMessageById);
 
   //! Handle file selection
   const handleFileChange = (e) => {
