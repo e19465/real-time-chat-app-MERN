@@ -29,38 +29,17 @@ const SendMessage = ({ user }) => {
   };
 
   //! Handle sending message
-  const handleSendMessage = async (e) => {
+  const handleSendMessage = (e) => {
     e.preventDefault();
     const trimmedMessage = message.trim();
-    const temporyFileUrls = files.map((file) => URL.createObjectURL(file));
-    const tempMessageId = `temp-${Date.now()}`;
-    if (trimmedMessage || files.length > 0) {
-      const newMessage = {
-        _id: tempMessageId,
-        senderId: userId,
-        receiverId: user._id,
-        text: trimmedMessage,
-        files: temporyFileUrls,
-        createdAt: new Date(),
-        temporary: true,
-      };
-      addMessage(newMessage);
-      setFiles([]);
-    }
-
     try {
       setSending(true);
       let formData = new FormData();
-      formData.append("text", message);
+      formData.append("text", trimmedMessage);
       files.forEach((file) => {
         formData.append("files", file);
       });
-      const response = await MessageService.createMessage(user._id, formData);
-      console.log("sended");
-      clearMessageById(tempMessageId);
-      addMessage(response.data);
-    } catch (err) {
-      clearMessageById(tempMessageId);
+      MessageService.createMessage(user._id, formData);
       globalErrorHandler(err, "Error sending message", "Error sending message");
     } finally {
       setSending(false);

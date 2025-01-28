@@ -3,6 +3,7 @@ const SuccessHandler = require("../helpers/SuccessHandler");
 const Message = require("../models/Message");
 const FileService = require("../services/FileService");
 const User = require("../models/User");
+const { sendMessageRealTimeSocket } = require("../helpers/SocketHandler");
 
 class MessageController {
   //! create message
@@ -43,6 +44,7 @@ class MessageController {
       const savedMessage = await newMessage.save();
 
       //TODO: real time functionality with socket.io
+      sendMessageRealTimeSocket(savedMessage);
 
       // return a success response with the saved message
       return SuccessHandler.handle201(

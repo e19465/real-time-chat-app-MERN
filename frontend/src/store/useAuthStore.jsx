@@ -28,7 +28,6 @@ export const useAuthStore = create((set, get) => ({
       userEmail: data?.email,
       userFullName: data?.fullName,
     });
-    useSocketStore.getState().connectToSocket();
   },
 
   // Check if user is authenticated
@@ -42,6 +41,5 @@ export const useAuthStore = create((set, get) => ({
     localStorage.clear();
     sessionStorage.clear();
     set({ userId: null, userEmail: null, userFullName: null });
-    useSocketStore.getState().disconnectFromSocket();
   },
 }));
